@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 import SignUpPage from './pages/SignUpPage';
-import SignInPage from './SignInPage';
+import SignInPage from './pages/SignInPage';
 
 const isAuthenticated = false;
 

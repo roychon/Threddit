@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/Authorization.module.css';
 
-const SignUpPage = () => {
+const SignInPage = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/sign-in');
+    navigate('/');
   };
 
   return (
@@ -16,10 +16,9 @@ const SignUpPage = () => {
           className={styles.signUpForm}
         >
           <div className='title-wrapper'>
-            <h1 className={styles.title}>Create An Account</h1>
+            <h1 className={styles.title}>Log In</h1>
             <p className={styles.message}>
-              Create an account to enjoy all ther services without any ads for
-              free!
+              Log in to enjoy all the services without any ads for free!
             </p>
           </div>
           <input
@@ -35,12 +34,12 @@ const SignUpPage = () => {
             className={styles.input}
           />
           <button type='submit' className={styles.button}>
-            Create Account
+            Log In
           </button>
           <div className={styles.message2}>
-            Already Have An Account?
+            Don't Have An Account?
             <span className={styles.span} onClick={handleClick}>
-              Sign In
+              Sign Up
             </span>
           </div>
         </form>
@@ -49,4 +48,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;

@@ -4,7 +4,7 @@
   --sign-up-form-background-color: rgb(20, 22, 21);
 }
 
-.signup-page-container {
+.container {
   width: 100vw;
   height: 100vh;
   background-color: black;
@@ -13,7 +13,7 @@
   align-items: center;
 }
 
-.sign-up-form {
+.signUpForm {
   width: 698px;
   height: 698px;
   background-color: var(--sign-up-form-background-color);
@@ -25,7 +25,7 @@
   color: var(--primary-text-color);
 }
 
-.sign-up-title {
+.title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,9 +34,10 @@
   height: 72.1px;
   font-size: 55.23px;
   line-height: 71.8px;
+  margin-bottom: 10px;
 }
 
-.sign-up-form-message {
+.message {
   text-align: center;
   width: 472.5px;
   height: 59.83px;
@@ -45,7 +46,7 @@
   color: var(--secondary-text-color);
 }
 
-.sign-up-input {
+.input {
   border: none;
   width: 575.27px;
   height: 84.4px;
@@ -55,7 +56,7 @@
   padding-left: 27px;
 }
 
-.sign-up-submit-button {
+.button {
   border: none;
   width: 285px;
   height: 67px;
@@ -64,7 +65,7 @@
   border-radius: 23px;
 }
 
-.sign-up-form-message2 {
+.message2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,13 +76,13 @@
   letter-spacing: 0%;
 }
 
-.sign-up-span {
+.span {
   margin-left: 5px;
   text-decoration: underline;
   cursor: pointer;
   transition: 0.3s all ease;
 }
 
-.sign-up-span:hover {
+.span:hover {
   color: white;
 }
