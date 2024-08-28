@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/Authorization.module.css';
+import FormTitle from '../components/FormTitle';
+import FormInput from '../components/FormInput';
+import FormPrompt from '../components/FormPrompt';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -15,20 +18,17 @@ const SignUpPage = () => {
           method='post'
           className={styles.signUpForm}
         >
-          <div className='title-wrapper'>
-            <h1 className={styles.title}>Create An Account</h1>
-            <p className={styles.message}>
-              Create an account to enjoy all ther services without any ads for
-              free!
-            </p>
-          </div>
-          <input
+          <FormTitle
+            title='Create An Account'
+            message='Create an account to enjoy all the services without any ads for free!'
+          />
+          <FormInput
             type='text'
             name='username'
             placeholder='Username'
             className={styles.input}
           />
-          <input
+          <FormInput
             type='password'
             name='password'
             placeholder='Password'
@@ -37,12 +37,11 @@ const SignUpPage = () => {
           <button type='submit' className={styles.button}>
             Create Account
           </button>
-          <div className={styles.message2}>
-            Already Have An Account?
-            <span className={styles.span} onClick={handleClick}>
-              Sign In
-            </span>
-          </div>
+          <FormPrompt
+            text='Already Have an Account?'
+            prompt='Sign In'
+            handleClick={handleClick}
+          />
         </form>
       </div>
     </>

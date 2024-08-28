@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/Authorization.module.css';
+import FormTitle from '../components/FormTitle';
+import FormInput from '../components/FormInput';
+import FormPrompt from '../components/FormPrompt';
 
 const SignInPage = () => {
   const navigate = useNavigate();
@@ -11,23 +14,21 @@ const SignInPage = () => {
     <>
       <div className={styles.container}>
         <form
-          action='/sign-up-form'
+          action='/sign-in-form'
           method='post'
           className={styles.signUpForm}
         >
-          <div className='title-wrapper'>
-            <h1 className={styles.title}>Log In</h1>
-            <p className={styles.message}>
-              Log in to enjoy all the services without any ads for free!
-            </p>
-          </div>
-          <input
+          <FormTitle
+            title='Log In'
+            message='Log in to enjoy all the services without any ads for free!'
+          />
+          <FormInput
             type='text'
             name='username'
             placeholder='Username'
             className={styles.input}
           />
-          <input
+          <FormInput
             type='password'
             name='password'
             placeholder='Password'
@@ -36,12 +37,11 @@ const SignInPage = () => {
           <button type='submit' className={styles.button}>
             Log In
           </button>
-          <div className={styles.message2}>
-            Don't Have An Account?
-            <span className={styles.span} onClick={handleClick}>
-              Sign Up
-            </span>
-          </div>
+          <FormPrompt
+            text="Don't Have an Account?"
+            prompt='Sign Up'
+            handleClick={handleClick}
+          />
         </form>
       </div>
     </>

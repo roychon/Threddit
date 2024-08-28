@@ -56,6 +56,10 @@
   padding-left: 27px;
 }
 
+.input:focus {
+  outline: none;
+}
+
 .button {
   border: none;
   width: 285px;
@@ -63,6 +67,13 @@
   font-weight: bold;
   font-size: 24px;
   border-radius: 23px;
+  transition: 0.3s all ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: white;
+  background-color: var(--sign-up-form-background-color);
 }
 
 .message2 {
