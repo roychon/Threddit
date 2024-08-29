@@ -18,7 +18,7 @@ app.use(
 );
 //
 
-app.use('/', signUpRouter);
+app.use('/sign-up', signUpRouter);
 
 // START SERVER
 app.listen(PORT, async () => {

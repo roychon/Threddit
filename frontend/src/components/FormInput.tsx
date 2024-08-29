@@ -1,8 +1,12 @@
+import { ChangeEvent } from 'react';
+
 interface FormInputProps {
   type: string;
   name: string;
   placeholder: string;
   className: string;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -10,6 +14,8 @@ const FormInput: React.FC<FormInputProps> = ({
   name,
   placeholder,
   className,
+  value,
+  onChange,
 }) => {
   return (
     <input
@@ -17,6 +23,8 @@ const FormInput: React.FC<FormInputProps> = ({
       name={name}
       placeholder={placeholder}
       className={className}
+      value={value}
+      onChange={onChange}
     />
   );
 };

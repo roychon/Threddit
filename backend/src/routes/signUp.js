@@ -1,14 +1,15 @@
 const { Router } = require('express');
 const signUpRouter = Router();
+const User = require('../model/User');
 
-signUpRouter.get(
-  '/',
-  (req,
-  (res) => {
-    /*
-    Finish this later
-    */
-  })
-);
+signUpRouter.post('/', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.create({ username, password });
+    res.send('Sent');
+  } catch {
+    res.status(500).send('A user with that username already exists');
+  }
+});
 
-signUpRouter.post('/sign-up', (req, res) => {});
+module.exports = signUpRouter;

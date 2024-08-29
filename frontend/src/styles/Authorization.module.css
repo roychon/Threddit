@@ -52,12 +52,26 @@
   height: 84.4px;
   border-radius: 15.34px;
   font-size: 23px;
-  color: var(--secondary-text-color);
+  color: black;
+  padding-left: 27px;
+}
+
+.inputError {
+  position: relative;
+  border: 2px solid red;
+  width: 575.27px;
+  height: 84.4px;
+  border-radius: 15.34px;
+  font-size: 23px;
   padding-left: 27px;
 }
 
 .input:focus {
   outline: none;
+}
+
+.input::selection {
+  background-color: none;
 }
 
 .button {
@@ -96,4 +110,18 @@
 
 .span:hover {
   color: white;
+}
+
+.error {
+  color: red;
+  font: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.username {
+  display: flex;
+  flex-direction: column;
 }
