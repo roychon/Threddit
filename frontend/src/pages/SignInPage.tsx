@@ -10,6 +10,7 @@ const SignInPage = () => {
   // State
   const [usernameText, setUserNameText] = useState<string>('');
   const [passwordText, setPasswordText] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
 
   // Setters
   const handleUserNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -20,21 +21,27 @@ const SignInPage = () => {
   };
 
   // Events
-  const onClick = async () => {
+  const onClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     // Send data to backend
     try {
-      await axios.post('/sign-up', {
+      const response = await axios.post('/login', {
         username: usernameText,
         password: passwordText,
       });
+      console.log(response);
+      setUserNameText('');
+      setPasswordText('');
+      setError('');
     } catch (error) {
-      console.log(error);
+      console.error('ERROR: ', error);
+      setError(error.response.data || 'Unexpected error occured');
     }
   };
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/');
+    navigate('/sign-up');
   };
 
   return (

@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const signUpRouter = require('./routes/signUp');
+const loginRouter = require('./routes/login');
 
 const PORT = process.env.PORT || '3000';
 const MONGODB_URL = process.env.MONGODB_URL;
@@ -21,6 +22,7 @@ app.use(cookieParser());
 //
 
 app.use('/sign-up', signUpRouter);
+app.use('/login', loginRouter);
 
 // START SERVER
 app.listen(PORT, async () => {

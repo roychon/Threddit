@@ -41,7 +41,7 @@ const SignUpPage = () => {
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/sign-in');
+    navigate('/login');
   };
 
   return (
@@ -76,7 +76,7 @@ const SignUpPage = () => {
           </button>
           <FormPrompt
             text='Already Have an Account?'
-            prompt='Sign In'
+            prompt='Log In'
             handleClick={handleClick}
           />
         </form>
