@@ -29,7 +29,6 @@ const SignUpPage = () => {
         username: usernameText,
         password: passwordText,
       });
-      console.log(response);
       setUserNameText('');
       setPasswordText('');
     } catch (error) {
