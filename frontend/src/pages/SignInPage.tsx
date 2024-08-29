@@ -58,7 +58,7 @@ const SignInPage = () => {
             placeholder='Username'
             value={usernameText}
             onChange={handleUserNameChange}
-            className={styles.input}
+            className={!error ? styles.input : styles.inputError}
           />
           <FormInput
             type='password'
@@ -66,8 +66,9 @@ const SignInPage = () => {
             placeholder='Password'
             value={passwordText}
             onChange={handlePasswordChange}
-            className={styles.input}
+            className={!error ? styles.input : styles.inputError}
           />
+          {error && <div className={styles.error}>{error.message}</div>}
           <button type='submit' className={styles.button} onClick={onClick}>
             Log In
           </button>

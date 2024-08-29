@@ -113,12 +113,11 @@
 }
 
 .error {
+  width: 80%;
   color: red;
   font: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-top: 10px;
+  text-align: center;
 }
 
 .username {

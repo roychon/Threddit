@@ -10,6 +10,8 @@ const SignUpPage = () => {
   // State
   const [usernameText, setUserNameText] = useState<string>('');
   const [passwordText, setPasswordText] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [userError, setUserError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   // Setters
@@ -22,6 +24,8 @@ const SignUpPage = () => {
 
   // Events
   const onClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    setPasswordError('');
+    setUserError('');
     e.preventDefault();
     // Send data to backend
     try {
@@ -35,7 +39,19 @@ const SignUpPage = () => {
       setError('');
     } catch (error) {
       console.error(error);
-      setError(error.response.data || 'Unexpected error occured');
+      const errorMessage = error.response.data || 'Unexpected error occurred';
+
+      if (errorMessage.includes('Password')) {
+        setPasswordError(
+          'Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.'
+        );
+      } else if (errorMessage === 'A user with that username already exists') {
+        setUserError('Username is already taken.');
+      } else if (errorMessage.includes('5')) {
+        setUserError('Username must be at least 5 letters');
+      } else {
+        setError('An unexpected error occurred.');
+      }
     }
   };
 
@@ -59,9 +75,9 @@ const SignUpPage = () => {
               placeholder='Username'
               value={usernameText}
               onChange={handleUserNameChange}
-              className={!error ? styles.input : styles.inputError}
+              className={!userError ? styles.input : styles.inputError}
             />
-            {error && <div className={styles.error}>{error}</div>}
+            {userError && <div className={styles.error}>{userError}</div>}
           </div>
           <FormInput
             type='password'
@@ -69,8 +85,10 @@ const SignUpPage = () => {
             placeholder='Password'
             value={passwordText}
             onChange={handlePasswordChange}
-            className={styles.input}
+            className={!passwordError ? styles.input : styles.inputError}
           />
+          {passwordError && <div className={styles.error}>{passwordError}</div>}
+          {error && <div className={styles.error}>{error}</div>}
           <button type='submit' className={styles.button} onClick={onClick}>
             Create Account
           </button>
