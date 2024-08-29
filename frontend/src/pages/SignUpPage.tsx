@@ -29,8 +29,10 @@ const SignUpPage = () => {
         username: usernameText,
         password: passwordText,
       });
+      console.log(response);
       setUserNameText('');
       setPasswordText('');
+      setError('');
     } catch (error) {
       console.error(error);
       setError(error.response.data || 'Unexpected error occured');

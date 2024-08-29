@@ -1,31 +1,36 @@
 const User = require('../model/User');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+
+// authenticate token middleware (move this to index.js later for ease of use)
+function authenticateToken(req, res, next) {
+  const token = req.cookies.access_token;
+  if (token === null) return res.sendStatus(401);
+  try {
+    const data = jwt.verify(token, process.env.ACCESS_TOKEN);
+    req.userName = data.name;
+    return next();
+  } catch {
+    return res.status(403);
+  }
+}
 
 const createUser = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user_db = await User.create({ username, password });
+    await User.create({ username, password });
 
     // Create jwt token for the user
     const user = { name: username };
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN);
-    res.json({ accessToken: accessToken });
+    return res
+      .cookie('access_token', accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+      })
+      .json({ message: 'Logged in successfully' });
   } catch {
     res.status(500).send('A user with that username already exists');
   }
 };
-
-// authenticate token middle
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (token === null) return res.sendStatus(401);
-  jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
-    if (err) return res.status(403);
-    req.user = user;
-    next();
-  });
-}
 
 module.exports = { createUser, authenticateToken };

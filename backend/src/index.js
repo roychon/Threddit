@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 const signUpRouter = require('./routes/signUp');
 
 const PORT = process.env.PORT || '3000';
@@ -16,6 +17,7 @@ app.use(
     origin: process.env.CORS_ORIGIN,
   })
 );
+app.use(cookieParser());
 //
 
 app.use('/sign-up', signUpRouter);

@@ -4,7 +4,7 @@ import FormTitle from '../components/FormTitle';
 import FormInput from '../components/FormInput';
 import FormPrompt from '../components/FormPrompt';
 import { ChangeEvent, useState } from 'react';
-import axios from 'axios';
+import axios from '../helpers/axios';
 
 const SignInPage = () => {
   // State
