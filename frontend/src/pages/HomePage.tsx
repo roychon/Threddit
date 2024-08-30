@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Nav from '../components/Nav';
 import axios from '../helpers/axios';
+import DisplayPost from '../components/DisplayPost';
+import styles from '../styles/HomePage.module.css';
 
 const HomePage = () => {
   // Write in TypeScript
@@ -23,9 +25,20 @@ const HomePage = () => {
   return (
     <>
       <Nav />
+      <h1 className={styles.yourFeed}>Your Feed</h1>
       {initialPosts &&
         initialPosts.map((post) => {
-          return <li key={post.user_id}>{post.description}</li>;
+          return (
+            <DisplayPost
+              key={post._id}
+              description={post.description}
+              title={post.title}
+              comments={post.comments}
+              likes={post.likes}
+              threadName={post.threadName}
+              username={post.user_id}
+            />
+          );
         })}
     </>
   );
