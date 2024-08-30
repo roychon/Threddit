@@ -52,7 +52,7 @@ const Nav = () => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <div className={styles.circle}></div>
+        <div className={styles.titleCircle}></div>
         <h2>Threddit</h2>
       </div>
       <div className={styles.searchbarContainer}>
