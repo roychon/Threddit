@@ -46,8 +46,9 @@
   border: none;
   background-color: transparent;
 }
-.searchButton {
-  cursor: pointer;
+
+.searchButton:hover {
+  background-color: transparent;
 }
 
 .searchBar {
