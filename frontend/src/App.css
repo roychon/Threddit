@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: white;
+  background-color: #0f0f0f;
+}
+
+input {
+  color: #0A0A0A;
+  outline: none;
+}
+
+button:hover {
+  background-color: #4c4c4c;
+}
+
+.white-div {
+  background-color: #FFFFFF;
+  color: #0A0A0A; 
+}
+
+.btn {
+  background-color: #0A0A0A;
+  color: #FFF7F7;
+  outline: none;
+  border: none;
+}
+
+.small-btn {
+  padding: 8px 10px;
+}
+
+.medium-btn {
+  height: 40px;
+  width: 180px;
+  font-size: 16px;
+}
+
+.flexRow {
+  display: flex;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.border-radius-10px {
+  border-radius: 10px;
+}
+
+#create-form {
+  width: 700px;
+  height: 500px;
+  color: black;
+  background-color: #FFFFFF;
+  padding: 25px 30px;
+  justify-content: space-between;
+}
+
+#create-form *:not(button) {
+    color: #0A0A0A;
+    background-color: #FFFFFF;
+    margin-bottom: 10px; /* Optional: Adds some space between form elements */
+    border-radius: 5px; /* Optional: Adds rounded corners to the form elements */
+}
+
+#create-form-inputs > input,
+#create-form-inputs > textarea {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border: 1px solid #0A0A0A;
+  width: 400px;
+}
+
+#create-form-title-input {
+  height: 60px;
+  color: #0A0A0A;
+  font-size: 30px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+#create-form-title-input:focus {
+  border: 2px solid black;
+}
+
+#create-form-description-input {
+  font-size: 15px;
+  height: 190px;
+  padding-top: 10px;
+  padding-left: 10px;
+  color: #0A0A0A;
+  resize: none;
+  outline: none;
+}
+
+#create-form-description-input:focus {
+  border: 2px solid black;
+}
+
+#create-post-btn {
+  padding: 10px 0; 
+  width: 400px; 
+  font-size: 16px;
+}
+
+#get-started {
+  background-color: #FFF7F7;
+  width: 450px;
+  height: 250px;
+  border-radius: 10px;
+  color: #100F0F;
+  display: flex;
+  flex-direction: column;
+  padding: 35px 15px;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 20px;
+}
+
+#home-pg-create-thread-btn {
+  padding: 5px 30px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#change-username {
+  width: 850px;
+  height: 280px;
+  padding: 40px 50px;
+  justify-content: space-between;
+}
+
+#change-username-input {
+  width: 450px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  color: #6e6e6e;
+  font-size: 16px;
+}
+
+#change-username-input-wrapper {
+  align-items: center;
+  border: 1px solid black;
+  width: 450px;
+  padding-left: 10px;
+  color: #6e6e6e;
+  font-size: 16px;
+}
+
+#about-thread-component {
+  width: 400px;
+  height: 250px;
+  padding: 20px;
+  justify-content: space-around;
+  font-size: 16px;
+}
