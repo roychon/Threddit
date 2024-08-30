@@ -1,0 +1,72 @@
+:root {
+  --primary-text-color: rgb(237, 243, 241);
+}
+
+.container {
+  height: 110px;
+  color: var(--primary-text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  background: #000000;
+  background: -webkit-linear-gradient(to left, #434343, #000000);
+  background: linear-gradient(to left, #434343, #000000);
+}
+
+.title {
+  width: 150px;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.circle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+}
+
+.searchbarContainer {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 20px;
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  width: 762px;
+  height: 40px;
+}
+
+.searchBar,
+.searchButton {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+.searchButton {
+  cursor: pointer;
+}
+
+.searchBar {
+  margin-left: 14px;
+  width: 100%;
+}
+
+.signInButton {
+  width: 126px;
+  height: 40px;
+  border: none;
+  font-weight: bolder;
+  font-size: 20px;
+  border-radius: 8px;
+  margin-right: 50px;
+  cursor: pointer;
+  transition: 0.3s all ease;
+}
+
+.signInButton:hover {
+  opacity: 0.7;
+}
