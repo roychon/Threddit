@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
 import CreateForm from "../components/CreateForm";
 
 const createThread = () => {
     return (
-        <CreateForm contentType="thread" />
+        <>
+            <Link to="/">Back home</Link>
+            <CreateForm contentType="thread" />
+        </>
     );
 }
  

@@ -4,6 +4,7 @@ const postRouter = Router()
 const Post = require("../model/Post")
 const User = require("../model/User")
 
+// TODO: create post controller
 postRouter.post("/", authenticateToken, async (req, res) => {
     const { title, description, threadID } = req.body
     const { username } = req

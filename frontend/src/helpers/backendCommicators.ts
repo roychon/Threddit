@@ -1,5 +1,5 @@
 import axios from "./axios"
-// TODO: add backend logic of actually adding it to database
+
 const createPost = async (title: String, description: String, threadID: String) => {
     try {
         await axios.post("/post", {
@@ -10,10 +10,10 @@ const createPost = async (title: String, description: String, threadID: String) 
     }
 }
 
-const createThread = async (title: String, description: String, user_id: any) => {
+const createThread = async (title: String, description: String, userID: any) => {
     try {
         await axios.post("/thread", {
-            title, description, user_id
+            title, description, userID
         })
         console.log("thread created")
     } catch (e) {
@@ -26,4 +26,15 @@ const checkAuthStatus = async () => {
     return status
 }
 
-export {createPost, createThread, checkAuthStatus}
+const changeUsername = async (newUsername: String, userID: any) => {
+    try {
+        const status = await axios.put("/user/username", {
+            newUsername, userID
+        })
+        return status
+    } catch (e) {
+        console.log("Error: ", e)
+    }
+}
+
+export {createPost, createThread, checkAuthStatus, changeUsername}

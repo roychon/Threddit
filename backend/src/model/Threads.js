@@ -15,6 +15,10 @@ const ThreadsSchema = new Schema({
     required: true,
     type: String,
   },
+  members: {
+    type: Number,
+    default: 0
+  }
 });
 
 module.exports = mongoose.model("Thread", ThreadsSchema)

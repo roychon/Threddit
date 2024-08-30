@@ -9,6 +9,7 @@ const loginRouter = require('./routes/login');
 const postRouter = require('./routes/post');
 const statusRouter = require('./routes/status');
 const threadRouter = require('./routes/threads');
+const userRouter = require('./routes/user')
 
 const PORT = process.env.PORT || '3000';
 const MONGODB_URL = process.env.MONGODB_URL;
@@ -28,6 +29,7 @@ app.use('/login', loginRouter);
 app.use('/post', postRouter);
 app.use('/thread', threadRouter);
 app.use('/auth-status', statusRouter);
+app.use("/user", userRouter)
 
 // START SERVER
 app.listen(PORT, async () => {
