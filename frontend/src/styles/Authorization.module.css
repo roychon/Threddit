@@ -1,0 +1,126 @@
+:root {
+  --primary-text-color: rgb(237, 243, 241);
+  --secondary-text-color: rgb(228, 236, 233);
+  --sign-up-form-background-color: rgb(20, 22, 21);
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signUpForm {
+  width: 698px;
+  height: 698px;
+  background-color: var(--sign-up-form-background-color);
+  border-radius: 49.09px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: var(--primary-text-color);
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  width: 483.23px;
+  height: 72.1px;
+  font-size: 55.23px;
+  line-height: 71.8px;
+  margin-bottom: 10px;
+}
+
+.message {
+  text-align: center;
+  width: 472.5px;
+  height: 59.83px;
+  line-height: 29.9px;
+  font-size: 23px;
+  color: var(--secondary-text-color);
+}
+
+.input {
+  border: none;
+  width: 575.27px;
+  height: 84.4px;
+  border-radius: 15.34px;
+  font-size: 23px;
+  color: black;
+  padding-left: 27px;
+}
+
+.inputError {
+  position: relative;
+  border: 2px solid red;
+  width: 575.27px;
+  height: 84.4px;
+  border-radius: 15.34px;
+  font-size: 23px;
+  padding-left: 27px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input::selection {
+  background-color: none;
+}
+
+.button {
+  border: none;
+  width: 285px;
+  height: 67px;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 23px;
+  transition: 0.3s all ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: white;
+  background-color: var(--sign-up-form-background-color);
+}
+
+.message2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  width: 326px;
+  height: 29px;
+  color: rgb(148, 149, 149);
+  letter-spacing: 0%;
+}
+
+.span {
+  margin-left: 5px;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.3s all ease;
+}
+
+.span:hover {
+  color: white;
+}
+
+.error {
+  width: 80%;
+  color: red;
+  font: 20px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.username {
+  display: flex;
+  flex-direction: column;
+}
