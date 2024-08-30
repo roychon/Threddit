@@ -6,9 +6,9 @@ require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const signUpRouter = require('./routes/signUp');
 const loginRouter = require('./routes/login');
-const postRouter = require("./routes/post")
-const statusRouter = require("./routes/status")
-const homeRouter = require('./routes/threads');
+const postRouter = require('./routes/post');
+const statusRouter = require('./routes/status');
+const threadRouter = require('./routes/threads');
 
 const PORT = process.env.PORT || '3000';
 const MONGODB_URL = process.env.MONGODB_URL;
@@ -26,8 +26,8 @@ app.use(cookieParser());
 app.use('/threads', /* insert the authenticateToken middleware */ threadRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/login', loginRouter);
-app.use("/post", postRouter)
-app.use("/auth-status", statusRouter)
+app.use('/post', postRouter);
+app.use('/auth-status', statusRouter);
 
 // START SERVER
 app.listen(PORT, async () => {
