@@ -2,6 +2,7 @@ import styles from '../styles/HomePage.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Comment {
   id: number;
@@ -19,6 +20,11 @@ interface DisplayPost {
 }
 
 const DisplayPost = (props: DisplayPost) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/threads/${props.username}`);
+  };
+
   return (
     <>
       <Link to={`/post/${props.username}`} className={styles.link}>
@@ -30,12 +36,9 @@ const DisplayPost = (props: DisplayPost) => {
             </div>
             <div className={styles.rightSection}>
               <div className={styles.rightTopContainer}>
-                <Link
-                  className={styles.threadName}
-                  to={`/threads/{props.username}`}
-                >
+                <div className={styles.threadName} onClick={handleClick}>
                   {props.threadName}
-                </Link>
+                </div>
                 <div className={styles.circle}></div>
                 <p>Posted by {props.username}</p>
               </div>
