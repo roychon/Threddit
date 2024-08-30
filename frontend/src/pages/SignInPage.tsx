@@ -11,6 +11,7 @@ const SignInPage = () => {
   const [usernameText, setUserNameText] = useState<string>('');
   const [passwordText, setPasswordText] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   // Setters
   const handleUserNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -33,13 +34,14 @@ const SignInPage = () => {
       setUserNameText('');
       setPasswordText('');
       setError('');
+      navigate("/")
     } catch (error) {
       console.error('ERROR: ', error);
       setError(error.response.data || 'Unexpected error occured');
     }
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleClick = () => {
     navigate('/sign-up');
   };
