@@ -37,12 +37,14 @@ const validateUsername = (username) => {
 // authenticate token middleware (move this to index.js later for ease of use)
 function authenticateToken(req, res, next) {
   const token = req.cookies.access_token;
-  if (token === null) return res.sendStatus(401);
+  if (!token) return res.sendStatus(401);
   try {
     const data = jwt.verify(token, process.env.ACCESS_TOKEN);
-    req.userName = data.name;
+    console.log("verified")
+    req.username = data.name;
     return next();
   } catch {
+    // console.log("error")
     return res.status(403);
   }
 }
@@ -57,7 +59,7 @@ const createUser = async (req, res) => {
     const hasedPassword = await bcrypt.hash(password, 10);
     await User.create({ username, password: hasedPassword });
 
-    const user = { name: username };
+    const user = { name: username, password };
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN);
     return res
       .cookie('access_token', accessToken, {
@@ -94,7 +96,7 @@ const loginUser = async (req, res) => {
       // We send a jwt token with cookie like above
       const accessToken = jwt.sign(
         // NOTE: if we sign using 'user' from database, error will occur since this is not a plain object, as it has custom methods
-        { username: user.username },
+        { name: user.username },
         process.env.ACCESS_TOKEN
       );
       console.log(match);
@@ -113,4 +115,11 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, loginUser, authenticateToken };
+const verifyUser = async (req, res) => {
+  const { username } = req
+  const user = await User.findOne({username})
+  if (!user) return res.status(404).send("User not found")
+  return res.json({username})
+}
+
+module.exports = { createUser, loginUser, authenticateToken, verifyUser };

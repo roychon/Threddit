@@ -6,6 +6,8 @@ require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const signUpRouter = require('./routes/signUp');
 const loginRouter = require('./routes/login');
+const postRouter = require("./routes/post")
+const statusRouter = require("./routes/status")
 
 const PORT = process.env.PORT || '3000';
 const MONGODB_URL = process.env.MONGODB_URL;
@@ -19,10 +21,12 @@ app.use(
   })
 );
 app.use(cookieParser());
-//
 
+// ROUTES
 app.use('/sign-up', signUpRouter);
 app.use('/login', loginRouter);
+app.use("/post", postRouter)
+app.use("/auth-status", statusRouter)
 
 // START SERVER
 app.listen(PORT, async () => {

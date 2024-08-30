@@ -6,7 +6,7 @@ const AboutThread = () => {
             <p>Members: $num-members</p>
             <p>Posts: $num-posts</p>
             <div className="flexRow" style={{"gap": "10px"}}>
-                <button className="btn small-btn border-radius-10px">Create Post</button>
+                <button className="btn small-btn border-radius-10px">View Thread</button>
                 <button className="btn small-btn border-radius-10px">Join Thread</button>
             </div>
         </section>
