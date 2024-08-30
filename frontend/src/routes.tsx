@@ -4,7 +4,7 @@ import ErrorPage from './pages/ErrorPage';
 import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
 
-const isAuthenticated = false;
+const isAuthenticated = true;
 
 const router = createBrowserRouter([
   {
