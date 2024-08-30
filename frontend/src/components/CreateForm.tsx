@@ -1,12 +1,15 @@
 import { useState } from "react";
 import Button from "./Button";
-import {createPost, createThread} from "../helpers/backendCommicators"
+import {createPost, createThread} from "../helpers/backendCommicators";
+import { useParams } from "react-router-dom";
 
-// TODO: add font styling
+// TODO: add font stylings
 const CreateForm = ({contentType}: {contentType: String}) => {
+    const params = useParams()
     const buttonTitle = contentType == "post" ? "Create Post" : "Create Thread"
-    const handleClick = () => {
-        contentType == "post" ? createPost(title, description) : createThread(title, description)
+    const handleClick = async () => {
+        await (contentType == "post" ? createPost(title, description, "10") : createThread(title, description))
+        // useNavigate() hook
     }
     const [title, setTitle] = useState<String>("")
     const [description, setDescription] = useState<String>("")

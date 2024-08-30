@@ -3,13 +3,14 @@ import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
+import CreatePost from './pages/CreatePost';
+import ProtectedRoute from './components/ProtectedRoute';
 
-const isAuthenticated = true;
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: isAuthenticated ? <HomePage /> : <Navigate to='/sign-up' />,
+    element: <ProtectedRoute><HomePage/></ProtectedRoute>,
     errorElement: <ErrorPage />,
   },
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     path: '/sign-up',
     element: <SignUpPage />,
   },
+  {
+    path: '/post',
+    element: <ProtectedRoute><CreatePost /></ProtectedRoute>
+  }
 ]);
 
 export default router;
