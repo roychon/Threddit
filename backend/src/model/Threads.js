@@ -13,3 +13,5 @@ const ThreadsSchema = new Schema({
     type: String,
   },
 });
+
+module.exports = mongoose.model('Threads', ThreadsSchema);

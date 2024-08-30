@@ -1,4 +1,4 @@
-const Post = require('../model/Threads');
+const Threads = require('../model/Threads');
 
 const searchKeyword = async (req, res) => {
   const { keyword } = req.body;
