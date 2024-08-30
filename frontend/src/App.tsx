@@ -1,8 +1,10 @@
 import './App.css'
+import AboutThread from './components/AboutThread'
 
 function App() {
-
-  return <h1>React App</h1>
+  
+  return <AboutThread />
+  
 }
 
 export default App
