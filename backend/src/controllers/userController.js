@@ -119,7 +119,7 @@ const verifyUser = async (req, res) => {
   const { username } = req
   const user = await User.findOne({username})
   if (!user) return res.status(404).send("User not found")
-  return res.json({username})
+  return res.json({id: user._id, username: user.username})
 }
 
 module.exports = { createUser, loginUser, authenticateToken, verifyUser };

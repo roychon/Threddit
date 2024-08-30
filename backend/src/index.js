@@ -23,10 +23,10 @@ app.use(
 );
 app.use(cookieParser());
 
-app.use('/threads', /* insert the authenticateToken middleware */ threadRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/post', postRouter);
+app.use('/thread', threadRouter);
 app.use('/auth-status', statusRouter);
 
 // START SERVER

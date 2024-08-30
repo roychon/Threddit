@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ThreadsSchema = new Schema({
-  user_id: Schema.Types.ObjectId,
+  user_id: {
+    required: true,
+    type: Schema.Types.ObjectId
+  },
   posts: [Schema.Types.ObjectId],
-  name: {
+  title: {
     required: true,
     type: String,
   },
@@ -13,3 +16,5 @@ const ThreadsSchema = new Schema({
     type: String,
   },
 });
+
+module.exports = mongoose.model("Thread", ThreadsSchema)
