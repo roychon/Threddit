@@ -89,7 +89,7 @@
 }
 
 .yourFeed {
-  margin-left: 130px;
+  margin-left: 300px;
   font-size: 40px;
   font-weight: bolder;
   color: var(--primary-text-color);
@@ -187,4 +187,9 @@
 .link {
   text-decoration: none;
   color: var(--primary-text-color);
+}
+
+.homePageContainer {
+  display: flex;
+  justify-content: space-around;
 }
