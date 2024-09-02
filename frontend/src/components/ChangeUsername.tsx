@@ -13,7 +13,7 @@ const ChangeUsername = () => {
         setUsername(e.target.value)
     }
 
-    const handleClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleClick = async () => {
         await changeUsername(username, auth?.user?._id)
         console.log("username successfully changed")
         navigate("/")
@@ -35,7 +35,7 @@ const ChangeUsername = () => {
                     <div style={{"width": "fitContent"}}>u/</div>
                     <input onChange={(e) => handleChange(e)} type="text" name="change-username-input" id="change-username-input" />
                 </div>
-                <button className="btn medium-btn border-radius-10px" onClick={(e) => handleClick(e)}>Change username</button>
+                <button className="btn medium-btn border-radius-10px" onClick={handleClick}>Change username</button>
                 <div style={{"height": "20px"}}>
                     {error && <p className="red">Username has to be at least 3 characters</p>}
                 </div>

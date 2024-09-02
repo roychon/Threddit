@@ -17,6 +17,7 @@ threadRouter.post('/', async (req, res) => {
     }
 })
 
+// get posts related to threadID
 threadRouter.get("/posts/:threadID", async (req, res) => {
     const { threadID } = req.params
     try {
