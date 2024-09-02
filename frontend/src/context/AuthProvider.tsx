@@ -9,13 +9,13 @@ interface User {
 
 interface UserAuth {
     user: User | null,
-    isLoggedIn: Boolean
+    isLoggedIn: Boolean | null
 }
 
 const AuthContext = createContext<UserAuth | null>(null)
 
 const AuthProvider = ({children}: {children: ReactNode}) => {
-    const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false)
+    const [isLoggedIn, setIsLoggedIn] = useState<Boolean | null>(null)
     const [user, setUser] = useState<User | null>(null)
     useEffect(() => {
         const initialAuthCheck = async () => {
@@ -26,6 +26,7 @@ const AuthProvider = ({children}: {children: ReactNode}) => {
                 setUser({username, _id: id})
             } catch (e) {
                 console.log("Initial auth check failed; user must log in")
+                setIsLoggedIn(false)
             }
         }
         initialAuthCheck()
