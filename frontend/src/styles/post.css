@@ -10,17 +10,22 @@ body {
 }
 
 input {
-  color: #0A0A0A;
+  color: #0a0a0a;
   outline: none;
 }
 
+button {
+  transition: 0.3s all ease;
+}
+
 button:hover {
-  background-color: #4c4c4c;
+  background-color: #bfbfbf;
+  cursor: pointer;
 }
 
 .white-div {
-  background-color: #FFFFFF;
-  color: #0A0A0A; 
+  background-color: #ffffff;
+  color: #0a0a0a;
 }
 
 .red {
@@ -36,8 +41,8 @@ button:hover {
 }
 
 .btn {
-  background-color: #0A0A0A;
-  color: #FFF7F7;
+  background-color: #0a0a0a;
+  color: #f0e9e9;
   outline: none;
   border: none;
 }
@@ -69,29 +74,29 @@ button:hover {
   width: 700px;
   height: 500px;
   color: black;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 25px 30px;
   justify-content: space-between;
 }
 
 #create-form *:not(button) {
-    color: #0A0A0A;
-    background-color: #FFFFFF;
-    margin-bottom: 10px; /* Optional: Adds some space between form elements */
-    border-radius: 5px; /* Optional: Adds rounded corners to the form elements */
+  color: #0a0a0a;
+  background-color: #ffffff;
+  margin-bottom: 10px; /* Optional: Adds some space between form elements */
+  border-radius: 5px; /* Optional: Adds rounded corners to the form elements */
 }
 
 #create-form-inputs > input,
 #create-form-inputs > textarea {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 10px;
-  border: 1px solid #0A0A0A;
+  border: 1px solid #0a0a0a;
   width: 400px;
 }
 
 #create-form-title-input {
   height: 60px;
-  color: #0A0A0A;
+  color: #0a0a0a;
   font-size: 30px;
   font-weight: bold;
   padding-left: 10px;
@@ -106,7 +111,7 @@ button:hover {
   height: 190px;
   padding-top: 10px;
   padding-left: 10px;
-  color: #0A0A0A;
+  color: #0a0a0a;
   resize: none;
   outline: none;
 }
@@ -116,17 +121,17 @@ button:hover {
 }
 
 #create-post-btn {
-  padding: 10px 0; 
-  width: 400px; 
+  padding: 10px 0;
+  width: 400px;
   font-size: 16px;
 }
 
 #get-started {
-  background-color: #FFF7F7;
+  background-color: #fff7f7;
   width: 450px;
   height: 250px;
   border-radius: 10px;
-  color: #100F0F;
+  color: #100f0f;
   display: flex;
   flex-direction: column;
   padding: 35px 15px;

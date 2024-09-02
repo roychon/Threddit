@@ -21,4 +21,4 @@ const ThreadsSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("Thread", ThreadsSchema)
+module.exports = mongoose.model('Threads', ThreadsSchema);
