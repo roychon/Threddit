@@ -39,8 +39,9 @@ const HomePage = () => {
                   title={post.title}
                   comments={post.comments}
                   likes={post.likes}
-                  threadName={post.threadName}
-                  username={post.user_id}
+                  threadName={"t/" + post.thread_id.title}
+                  username={post.user_id.username}
+                  thread_id={post.thread_id._id}
                 />
               );
             })}
