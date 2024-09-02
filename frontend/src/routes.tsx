@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import CreateThread from './pages/CreateThread';
 import Nav from './components/Nav';
 import ChangeUsername from './components/ChangeUsername';
+import ThreadPage from './pages/ThreadPage';
 
 
 const router = createBrowserRouter([
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
     element: <SignUpPage />,
   },
   {
-    path: '/post',
+    path: '/post/:threadID',
     element: <ProtectedRoute><Nav/><CreatePost /></ProtectedRoute>
   },
   {
@@ -35,6 +36,9 @@ const router = createBrowserRouter([
   {
     path: '/change-username',
     element: <ProtectedRoute><Nav/><ChangeUsername /></ProtectedRoute>
+  },
+  {path: '/thread/:threadID',
+    element: <ProtectedRoute><Nav/><ThreadPage/></ProtectedRoute>
   }
 ]);
 

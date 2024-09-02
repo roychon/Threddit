@@ -37,4 +37,15 @@ const changeUsername = async (newUsername: String, userID: any) => {
     }
 }
 
-export {createPost, createThread, checkAuthStatus, changeUsername}
+const joinThread = async (userID: any, threadID: any) => {
+    try {
+        const data = await axios.post("/thread/join", {
+            userID, threadID
+        })
+        console.log(data)
+    } catch (e) {
+        console.log("Error: ", e)
+    }
+}
+
+export {createPost, createThread, checkAuthStatus, changeUsername, joinThread}
