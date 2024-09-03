@@ -14,8 +14,8 @@ const HomePage = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get('/post');
-        console.log(response.data.posts);
         setInitialPosts(response.data.posts);
+        console.log(initialPosts);
       } catch (error) {
         console.log(error);
       }
@@ -39,7 +39,7 @@ const HomePage = () => {
                   title={post.title}
                   comments={post.comments}
                   likes={post.likes}
-                  threadName={"t/" + post.thread_id.title}
+                  threadName={'t/' + post.thread_id.title}
                   username={post.user_id.username}
                   thread_id={post.thread_id._id}
                 />

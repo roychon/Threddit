@@ -19,7 +19,6 @@ const Nav = () => {
           });
           console.log(response);
           //   setThreads(response);
-          setKeyword('');
         } catch {
           console.log('Error');
         }
@@ -71,9 +70,9 @@ const Nav = () => {
         />
         {isFocused && threads.length > 0 && (
           <ul>
-            {threads.slice(0, 5).map((thread) => {
+            {/* {threads.slice(0, 5).map((thread) => {
               // return <li key={}>{}</li>;
-            })}
+            })} */}
           </ul>
         )}
       </div>

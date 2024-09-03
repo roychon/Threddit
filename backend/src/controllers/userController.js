@@ -40,7 +40,7 @@ function authenticateToken(req, res, next) {
   if (!token) return res.sendStatus(401);
   try {
     const data = jwt.verify(token, process.env.ACCESS_TOKEN);
-    console.log("verified")
+    console.log('verified');
     req.username = data.name;
     return next();
   } catch {
@@ -116,10 +116,10 @@ const loginUser = async (req, res) => {
 };
 
 const verifyUser = async (req, res) => {
-  const { username } = req
-  const user = await User.findOne({username})
-  if (!user) return res.status(404).send("User not found")
-  return res.json({id: user._id, username: user.username})
-}
+  const { username } = req;
+  const user = await User.findOne({ username });
+  if (!user) return res.status(404).send('User not found');
+  return res.json({ id: user._id, username: user.username });
+};
 
 module.exports = { createUser, loginUser, authenticateToken, verifyUser };
