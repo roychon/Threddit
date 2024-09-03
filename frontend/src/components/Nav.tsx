@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEvent, useEffect, useState } from 'react';
 import axios from '../helpers/axios';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
   const [keyword, setKeyword] = useState<string>('');
@@ -17,6 +18,7 @@ const Nav = () => {
           const response = await axios.post('/thread/search-bar', {
             keyword: keyword,
           });
+          console.log(response.data);
           console.log(response.data.threads);
           setThreads(response.data.threads);
         } catch {
@@ -62,7 +64,7 @@ const Nav = () => {
           <input
             className={styles.searchBar}
             type='text'
-            placeholder='Search threads'
+            placeholder='Search Threddit'
             value={keyword}
             onChange={handleChange}
             onKeyDown={handleEnter}
@@ -76,8 +78,10 @@ const Nav = () => {
                 {threads.slice(0, 5).map((thread) => {
                   return (
                     <li key={thread._id} className={styles.threads}>
-                      <p>t/{thread.title}</p>
-                      <p>Members: {thread.members.length}</p>
+                      <Link to={`/thread/${thread._id}`}>
+                        <p>t/{thread.title}</p>
+                        <p>Members: {thread.members.length}</p>
+                      </Link>
                     </li>
                   );
                 })}

@@ -88,6 +88,11 @@
   flex-direction: column;
 }
 
+.threads a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .threads p:first-child {
   font-size: 14px;
 }
