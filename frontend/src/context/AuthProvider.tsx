@@ -1,29 +1,32 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { checkAuthStatus } from "../helpers/backendCommicators";
+import { Types } from "mongoose"
 
 interface User {
-    username: String
+    username: String,
+    _id: Types.ObjectId
 }
 
 interface UserAuth {
     user: User | null,
-    isLoggedIn: Boolean
+    isLoggedIn: Boolean | null
 }
 
 const AuthContext = createContext<UserAuth | null>(null)
 
 const AuthProvider = ({children}: {children: ReactNode}) => {
-    const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false)
+    const [isLoggedIn, setIsLoggedIn] = useState<Boolean | null>(null)
     const [user, setUser] = useState<User | null>(null)
     useEffect(() => {
         const initialAuthCheck = async () => {
             try {
                 const res = await checkAuthStatus() // uses verifyToken middleware to validate jwt
-                // console.log(res)
+                const {username, id} = res.data
                 setIsLoggedIn(true)
-                setUser(res.data)
+                setUser({username, _id: id})
             } catch (e) {
                 console.log("Initial auth check failed; user must log in")
+                setIsLoggedIn(false)
             }
         }
         initialAuthCheck()

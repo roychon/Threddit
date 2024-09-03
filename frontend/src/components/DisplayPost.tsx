@@ -17,17 +17,18 @@ interface DisplayPost {
   description: string;
   comments: Comment[];
   likes: number;
+  thread_id: any
 }
 
 const DisplayPost = (props: DisplayPost) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/threads/${props.username}`);
+    navigate(`/thread/${props.thread_id}`);
   };
 
   return (
     <>
-      <Link to={`/post/${props.username}`} className={styles.link}>
+      {/* <Link to={`/post/${props.username}`} className={styles.link}> */}
         <div className={styles.postContainer}>
           <div className={styles.topContainer}>
             <div className={styles.leftSection}>
@@ -42,7 +43,7 @@ const DisplayPost = (props: DisplayPost) => {
                 <div className={styles.circle}></div>
                 <p>Posted by {props.username}</p>
               </div>
-              <h1 className={styles.postTitle}>{props.title}</h1>
+              <h1 className={styles.postTitle} onClick={() => navigate(`/post/${props.username}`)}>{props.title}</h1>
               <p>{props.description}</p>
             </div>
           </div>
@@ -51,7 +52,7 @@ const DisplayPost = (props: DisplayPost) => {
             <span>{props.comments.length} comments</span>
           </div>
         </div>
-      </Link>
+      {/* </Link> */}
     </>
   );
 };

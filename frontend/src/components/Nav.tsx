@@ -14,7 +14,7 @@ const Nav = () => {
     if (keyword.length > 0 && isFocused) {
       const fetchThreads = () => {
         try {
-          const response = axios.post('/threads', {
+          const response = axios.post('/thread/search-bar', {
             keyword: keyword,
           });
           console.log(response);

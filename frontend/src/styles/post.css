@@ -28,6 +28,18 @@ button:hover {
   color: #0a0a0a;
 }
 
+.red {
+  color: red;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+}
+
 .btn {
   background-color: #0a0a0a;
   color: #f0e9e9;
@@ -139,7 +151,7 @@ button:hover {
 
 #change-username {
   width: 850px;
-  height: 280px;
+  height: 320px;
   padding: 40px 50px;
   justify-content: space-between;
 }

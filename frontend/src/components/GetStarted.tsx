@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 const GetStarted = () => {
-  // const navigate = useNavigate()
-  // TODO: make sure styling is inter font
+  const navigate = useNavigate()
   return (
     <section id='get-started'>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -12,7 +11,7 @@ const GetStarted = () => {
         </h3>
         <button
           onClick={() =>
-            console.log('Make this navigate to create thread page')
+            navigate("/thread")
           }
           id='home-pg-create-thread-btn'
         >
