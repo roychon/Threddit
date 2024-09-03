@@ -15,7 +15,6 @@ const HomePage = () => {
       try {
         const response = await axios.get('/post');
         setInitialPosts(response.data.posts);
-        console.log(initialPosts);
       } catch (error) {
         console.log(error);
       }

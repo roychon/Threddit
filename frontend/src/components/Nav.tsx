@@ -12,13 +12,13 @@ const Nav = () => {
   // On mount and when the keywords change, fetch from the backend:
   useEffect(() => {
     if (keyword.length > 0 && isFocused) {
-      const fetchThreads = () => {
+      const fetchThreads = async () => {
         try {
-          const response = axios.post('/thread/search-bar', {
+          const response = await axios.post('/thread/search-bar', {
             keyword: keyword,
           });
-          console.log(response);
-          //   setThreads(response);
+          console.log(response.data.threads);
+          setThreads(response.data.threads);
         } catch {
           console.log('Error');
         }
@@ -58,23 +58,33 @@ const Nav = () => {
         <button className={styles.searchButton}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
-        <input
-          className={styles.searchBar}
-          type='text'
-          placeholder='Search threads'
-          value={keyword}
-          onChange={handleChange}
-          onKeyDown={handleEnter}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        {isFocused && threads.length > 0 && (
-          <ul>
-            {/* {threads.slice(0, 5).map((thread) => {
-              // return <li key={}>{}</li>;
-            })} */}
-          </ul>
-        )}
+        <div className={styles.inputColumn}>
+          <input
+            className={styles.searchBar}
+            type='text'
+            placeholder='Search threads'
+            value={keyword}
+            onChange={handleChange}
+            onKeyDown={handleEnter}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          />
+          {isFocused && threads.length > 0 && (
+            <div className={styles.threadsContainer}>
+              <ul>
+                <li>b</li>
+                {threads.slice(0, 5).map((thread) => {
+                  return (
+                    <li key={thread._id} className={styles.threads}>
+                      <p>t/{thread.title}</p>
+                      <p>Members: {thread.members.length}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
       <button className={styles.signInButton}>Sign in</button>
     </div>
