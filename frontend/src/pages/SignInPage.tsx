@@ -30,7 +30,7 @@ const SignInPage = () => {
         username: usernameText,
         password: passwordText,
       });
-      console.log(response);
+
       setUserNameText('');
       setPasswordText('');
       setError(null);

@@ -1,7 +1,7 @@
 import styles from '../styles/HomePage.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
 import axios from '../helpers/axios';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const Nav = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [threads, setThreads] = useState<any>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  // console.log('Threads: ', threads);
+
   // On mount and when the keywords change, fetch from the backend:
   useEffect(() => {
     if (keyword.length > 0 && isFocused) {
@@ -46,7 +46,7 @@ const Nav = () => {
     setIsFocused(true);
   };
 
-  const handleBlur = (e): void => {
+  const handleBlur = (e: FocusEvent<HTMLInputElement, Element>): void => {
     // setIsFocused(false);
     e.preventDefault();
   };
@@ -56,7 +56,9 @@ const Nav = () => {
       <div className={styles.container}>
         <div className={styles.title}>
           <div className={styles.titleCircle}></div>
-          <h2>Threddit</h2>
+          <Link to={'/'} className={styles.titleName}>
+            Threddit
+          </Link>
         </div>
         <div className={styles.searchbarContainer}>
           <button className={styles.searchButton}>
@@ -92,7 +94,7 @@ const Nav = () => {
             )}
           </div>
         </div>
-        <button className={styles.signInButton}>Sign in</button>
+        <div className={styles.profile}></div>
       </div>
     </>
   );
