@@ -5,10 +5,10 @@ import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
 import CreatePost from './pages/CreatePost';
 import ProtectedRoute from './components/ProtectedRoute';
-import CreateThread from './pages/createThread';
 import Nav from './components/Nav';
 import ChangeUsername from './components/ChangeUsername';
 import ThreadPage from './pages/ThreadPage';
+import CreateThread from './pages/CreateThread';
 
 const router = createBrowserRouter([
   {

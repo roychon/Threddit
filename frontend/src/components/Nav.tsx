@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 
 const Nav = () => {
   const [keyword, setKeyword] = useState<string>('');
-  const [threads, setThreads] = useState([]);
+  const [threads, setThreads] = useState<any>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
-
+  // console.log('Threads: ', threads);
   // On mount and when the keywords change, fetch from the backend:
   useEffect(() => {
     if (keyword.length > 0 && isFocused) {
@@ -18,7 +18,7 @@ const Nav = () => {
           const response = await axios.post('/thread/search-bar', {
             keyword: keyword,
           });
-          console.log(response.data);
+          // console.log(response.data);
           console.log(response.data.threads);
           setThreads(response.data.threads);
         } catch {
@@ -46,52 +46,55 @@ const Nav = () => {
     setIsFocused(true);
   };
 
-  const handleBlur = (): void => {
-    setIsFocused(false);
+  const handleBlur = (e): void => {
+    // setIsFocused(false);
+    e.preventDefault();
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.title}>
-        <div className={styles.titleCircle}></div>
-        <h2>Threddit</h2>
-      </div>
-      <div className={styles.searchbarContainer}>
-        <button className={styles.searchButton}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </button>
-        <div className={styles.inputColumn}>
-          <input
-            className={styles.searchBar}
-            type='text'
-            placeholder='Search Threddit'
-            value={keyword}
-            onChange={handleChange}
-            onKeyDown={handleEnter}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-          {isFocused && threads.length > 0 && (
-            <div className={styles.threadsContainer}>
-              <ul>
-                <li>b</li>
-                {threads.slice(0, 5).map((thread) => {
-                  return (
-                    <li key={thread._id} className={styles.threads}>
-                      <Link to={`/thread/${thread._id}`}>
-                        <p>t/{thread.title}</p>
-                        <p>Members: {thread.members.length}</p>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
+    <>
+      <div className={styles.container}>
+        <div className={styles.title}>
+          <div className={styles.titleCircle}></div>
+          <h2>Threddit</h2>
         </div>
+        <div className={styles.searchbarContainer}>
+          <button className={styles.searchButton}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
+          <div className={styles.inputColumn}>
+            <input
+              className={styles.searchBar}
+              type='text'
+              placeholder='Search Threddit'
+              value={keyword}
+              onChange={handleChange}
+              onKeyDown={handleEnter}
+              onFocus={handleFocus}
+              onBlur={(e) => handleBlur(e)}
+            />
+            {threads.length > 0 && (
+              <div className={styles.threadsContainer}>
+                <ul>
+                  <li>b</li>
+                  {threads.slice(0, 1).map((thread: any) => {
+                    return (
+                      <li key={thread._id} className={styles.threads}>
+                        <Link to={`/thread/${thread._id}`}>
+                          <p>t/{thread.title}</p>
+                          <p>Members: {thread.members.length}</p>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+        <button className={styles.signInButton}>Sign in</button>
       </div>
-      <button className={styles.signInButton}>Sign in</button>
-    </div>
+    </>
   );
 };
 export default Nav;

@@ -1,0 +1,44 @@
+.link,
+.link2 {
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+  /* margin-top: 86px; */
+  margin-left: 130px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.link {
+  cursor: pointer;
+  transition: 0.3s all ease;
+}
+
+.link:hover {
+  color: rgb(186, 186, 186);
+}
+
+.text {
+  margin-top: 50px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  margin-right: 250px;
+  margin-top: -150px;
+}
+
+.link2 {
+  font-size: 36px;
+  font-weight: bolder;
+}

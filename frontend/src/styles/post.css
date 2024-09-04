@@ -26,6 +26,8 @@ button:hover {
 .white-div {
   background-color: #ffffff;
   color: #0a0a0a;
+  width: 416px;
+  height: 265px;
 }
 
 .red {
@@ -77,6 +79,8 @@ button:hover {
   background-color: #ffffff;
   padding: 25px 30px;
   justify-content: space-between;
+  margin-top: 50px;
+  margin-left: 50px;
 }
 
 #create-form *:not(button) {

@@ -1,4 +1,6 @@
 const Threads = require('../model/Threads');
+const User = require('../model/User');
+const Post = require('../model/Post');
 
 const searchKeyword = async (req, res) => {
   const { keyword } = req.body;
@@ -17,7 +19,11 @@ const createThread = async (req, res) => {
   const { title, description, userID } = req.body;
   // console.log(title, description, user_id)
   try {
-    const thread = await Thread.create({ title, description, user_id: userID });
+    const thread = await Threads.create({
+      title,
+      description,
+      user_id: userID,
+    });
     const user = await User.findOne({ _id: userID });
     user.threads_created = [...user.threads_created, thread._id];
     thread.members = [...thread.members, user._id];
@@ -33,7 +39,7 @@ const createThread = async (req, res) => {
 const joinThread = async (req, res) => {
   const { userID, threadID } = req.body;
   try {
-    const thread = await Thread.findOne({ _id: threadID });
+    const thread = await Threads.findOne({ _id: threadID });
     if (!thread) res.status(404).send('Thread not found');
     const user = await User.findOne({ _id: userID });
     if (thread.members.includes(user._id))
@@ -51,7 +57,7 @@ const joinThread = async (req, res) => {
 const getThreadName = async (req, res) => {
   const { threadID } = req.params;
   try {
-    const thread = await Thread.findOne({ _id: threadID });
+    const thread = await Threads.findOne({ _id: threadID });
     return res.json({ threadName: thread.title });
   } catch (e) {
     return res.status(401).send('Error getting name of threadID');
@@ -62,7 +68,7 @@ const getThreadPosts = async (req, res) => {
   const { threadID } = req.params;
   // console.log(threadID)
   try {
-    const thread = await Thread.findOne({ _id: threadID });
+    const thread = await Threads.findOne({ _id: threadID });
     const threadCreator = await User.findOne({ _id: thread.user_id });
     const numMembers = thread.members.length;
     const numPosts = thread.posts.length;
