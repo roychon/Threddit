@@ -9,4 +9,7 @@ postRouter.post('/', authenticateToken, PostController.createPost);
 
 postRouter.get('/', PostController.getPosts);
 
+// Get posts related to the keyword
+postRouter.post('/keyword', PostController.getKeywordPosts);
+
 module.exports = postRouter;
