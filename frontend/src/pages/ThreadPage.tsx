@@ -4,6 +4,7 @@ import axios from '../helpers/axios';
 import DisplayPost from '../components/DisplayPost';
 import AboutThread from '../components/AboutThread';
 import styles from '../styles/ThreadPage.module.css';
+import useInfiniteScrollPosts from '../hooks/useThreadPostInfiniteScroll';
 
 interface UserProps {
   username: string;
@@ -30,14 +31,21 @@ interface ThreadProps {
 }
 
 const ThreadPage = () => {
-  const [threadInfo, setThreadInfo] = useState<ThreadProps | null>(null);
-  const [posts, setPosts] = useState<[DisplayPostProps] | null>(null);
   const { threadID } = useParams();
+  const endpoint = `/thread/posts/${threadID}`;
+  const [threadInfo, setThreadInfo] = useState<ThreadProps | null>(null);
+
+  // Use the custom hook for infinite scrolling
+  const { posts, lastPostRef, loading, hasMore } = useInfiniteScrollPosts(
+    1,
+    endpoint
+  );
+
   useEffect(() => {
-    const fetchThreadPosts = async () => {
+    const fetchThreadInfo = async () => {
       try {
         const data = await axios.get(`/thread/posts/${threadID}`);
-        setPosts(data.data.threadPosts);
+        setThreadInfo(data.data.threadPosts);
         console.log('data', data.data);
         setThreadInfo({
           threadID: data.data.threadID,
@@ -50,8 +58,9 @@ const ThreadPage = () => {
         console.log('ERROR: ', e);
       }
     };
-    fetchThreadPosts();
-  }, []);
+    fetchThreadInfo();
+  }, [threadID]);
+
   return (
     <div className={styles.container}>
       <div className={styles.text}>
@@ -64,17 +73,19 @@ const ThreadPage = () => {
         {posts &&
           posts.map((post) => {
             return (
-              <DisplayPost
-                className={styles.postContainer}
-                key={post._id}
-                description={post.description}
-                title={post.title}
-                comments={post.comments}
-                likes={post.likes}
-                threadName={post.threadName}
-                username={post.user_id.username}
-                thread_id={post.thread_id}
-              />
+              <div ref={lastPostRef} key={post._id}>
+                <DisplayPost
+                  className={styles.postContainer}
+                  key={post._id}
+                  description={post.description}
+                  title={post.title}
+                  comments={post.comments}
+                  likes={post.likes}
+                  threadName={post.threadName}
+                  username={post.user_id.username}
+                  thread_id={post.thread_id}
+                />
+              </div>
             );
           })}
       </div>

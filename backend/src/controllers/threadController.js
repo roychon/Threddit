@@ -66,20 +66,23 @@ const getThreadName = async (req, res) => {
 
 const getThreadPosts = async (req, res) => {
   const { threadID } = req.params;
-  // console.log(threadID)
+  const { page = 1, limit = 5 } = req.query; // Get page and limit from query parameters
+  const skip = (parseInt(page) - 1) * parseInt(limit); // Calculate how many posts to skip
+
   try {
     const thread = await Threads.findOne({ _id: threadID });
     const threadCreator = await User.findOne({ _id: thread.user_id });
     const numMembers = thread.members.length;
     const numPosts = thread.posts.length;
-    const threadPosts = await Post.find(
-      { thread_id: threadID },
-      'likes threadName title description user_id thread_id comments'
-    )
+
+    const threadPosts = await Post.find({ thread_id: threadID })
       .populate('user_id', 'username')
       .sort({ likes: -1 })
-      .limit(5);
+      .skip(skip) // Skip the number of posts based on the current page
+      .limit(parseInt(limit)); // Limit the number of posts returned
+
     console.log(threadPosts);
+
     res.json({
       numMembers,
       numPosts,
@@ -87,9 +90,11 @@ const getThreadPosts = async (req, res) => {
       threadID: thread._id,
       threadCreator,
       threadPosts,
+      hasMore: numPosts > skip + threadPosts.length, // Determine if there are more posts
     });
   } catch (e) {
     console.log('Error: ', e);
+    res.status(500).send('Server Error');
   }
 };
 
