@@ -22,7 +22,7 @@ const AboutThread = ({
   const auth = useContext(AuthContext);
   return (
     <section
-      className='white-div border-radius-10px flexCol'
+      className={'white-div border-radius-10px flexCol'}
       id='about-thread-component'
     >
       <h1 style={{ fontWeight: 'bolder' }}>About {threadName}</h1>

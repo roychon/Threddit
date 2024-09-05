@@ -65,6 +65,7 @@ const ThreadPage = () => {
           posts.map((post) => {
             return (
               <DisplayPost
+                className={styles.postContainer}
                 key={post._id}
                 description={post.description}
                 title={post.title}

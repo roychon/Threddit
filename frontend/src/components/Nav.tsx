@@ -12,33 +12,55 @@ const Nav = () => {
 
   // On mount and when the keywords change, fetch from the backend:
   useEffect(() => {
+    const controller = new AbortController(); // Create a new AbortController instance
+
     if (keyword.length > 0 && isFocused) {
       const fetchThreads = async () => {
         try {
-          const response = await axios.post('/thread/search-bar', {
-            keyword: keyword,
-          });
-          // console.log(response.data);
-          console.log(response.data.threads);
+          console.log('Fetching threads with keyword:', keyword);
+          const response = await axios.post(
+            '/thread/search-bar',
+            { keyword: keyword },
+            { signal: controller.signal } // Pass the signal for cancellation
+          );
+          console.log('Response received:', response.data.threads);
           setThreads(response.data.threads);
-        } catch {
-          console.log('Error');
+        } catch (e) {
+          if (e.name === 'AbortError') {
+            console.log('Request canceled');
+          } else {
+            console.error('An error occurred:', e);
+          }
         }
       };
 
       fetchThreads();
     } else {
+      console.log('No keyword or not focused');
       setThreads([]);
     }
+
+    return () => {
+      console.log('Aborting request');
+      controller.abort(); // Cancel the request if the component unmounts or dependencies change
+    };
   }, [keyword, isFocused]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setKeyword(e.target.value);
   };
 
-  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      // code to send them to the '/threads' page
+  const handleEnter = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && keyword) {
+      // We can navigate them to a different page, and use the code below to useEffect once the page mounts to display. (Like HomePage)
+      try {
+        const response = await axios.post('/post/keyword', {
+          keyword: keyword,
+        });
+        console.log(response.data.posts);
+      } catch (error) {
+        console.log('Error fetching posts');
+      }
     }
   };
 
@@ -94,7 +116,7 @@ const Nav = () => {
             )}
           </div>
         </div>
-        <div className={styles.profile}></div>
+        <button className={styles.signInButton}>Sign in</button>
       </div>
     </>
   );
