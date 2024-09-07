@@ -36,16 +36,14 @@ const ThreadPage = () => {
   const [threadInfo, setThreadInfo] = useState<ThreadProps | null>(null);
 
   // Use the custom hook for infinite scrolling
-  const { posts, lastPostRef, loading, hasMore } = useInfiniteScrollPosts(
-    1,
-    endpoint
-  );
+  const { posts, lastPostRef, loading, hasMore, setPosts, setPage } =
+    useInfiniteScrollPosts(1, endpoint);
 
   useEffect(() => {
     const fetchThreadInfo = async () => {
       try {
         const data = await axios.get(`/thread/posts/${threadID}`);
-        setThreadInfo(data.data.threadPosts);
+        // setThreadInfo(data.data.threadPosts);
         console.log('data', data.data);
         setThreadInfo({
           threadID: data.data.threadID,
@@ -59,6 +57,12 @@ const ThreadPage = () => {
       }
     };
     fetchThreadInfo();
+  }, [threadID]);
+
+  // Reset posts when threadID changes
+  useEffect(() => {
+    setPosts([]);
+    setPage(1);
   }, [threadID]);
 
   return (

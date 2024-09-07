@@ -59,7 +59,7 @@ const useInfiniteScrollPosts = (initialPage: number, endpoint: string) => {
     [loading, hasMore]
   );
 
-  return { posts, lastPostRef, loading, hasMore };
+  return { posts, lastPostRef, loading, hasMore, setPosts, setPage };
 };
 
 export default useInfiniteScrollPosts;

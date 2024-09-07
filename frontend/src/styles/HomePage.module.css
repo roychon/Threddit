@@ -55,7 +55,7 @@
   position: absolute;
   top: 0%;
   left: 0;
-  height: 100px;
+  /* height: 100px; */
   width: 100%;
   background-color: #ededed;
   border: 1px solid #ddd;
@@ -80,7 +80,7 @@
 }
 
 .threadsContainer li:first-child {
-  padding: 8px 12px; /* Add some padding for each item */
+  padding: 8px 12px;
   border: none;
   color: #ededed;
 }
@@ -93,6 +93,7 @@
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+  background-color: #ededed;
 }
 
 .threads a {

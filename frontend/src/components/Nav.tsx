@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
 import axios from '../helpers/axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Nav = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [threads, setThreads] = useState<any>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const location = useLocation();
 
   // On mount and when the keywords change, fetch from the backend:
   useEffect(() => {
@@ -25,6 +26,7 @@ const Nav = () => {
           );
           console.log('Response received:', response.data.threads);
           setThreads(response.data.threads);
+          console.log(threads);
         } catch (e) {
           if (e.name === 'AbortError') {
             console.log('Request canceled');
@@ -45,6 +47,11 @@ const Nav = () => {
       controller.abort(); // Cancel the request if the component unmounts or dependencies change
     };
   }, [keyword, isFocused]);
+
+  useEffect(() => {
+    // Reset the keyword whenever the route changes
+    setKeyword('');
+  }, [location]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setKeyword(e.target.value);
@@ -101,7 +108,7 @@ const Nav = () => {
               <div className={styles.threadsContainer}>
                 <ul>
                   <li>b</li>
-                  {threads.slice(0, 1).map((thread: any) => {
+                  {threads.map((thread: any) => {
                     return (
                       <li key={thread._id} className={styles.threads}>
                         <Link to={`/thread/${thread._id}`}>

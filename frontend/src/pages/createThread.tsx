@@ -10,8 +10,9 @@ const CreateThread = () => {
   const buttonTitle = 'Create Thread';
   const auth = useContext(AuthContext);
   const handleClick = async () => {
-    await createThread(title, description, auth!.user!._id);
+    const response = await createThread(title, description, auth!.user!._id);
     navigate('/');
+    console.log(response);
   };
   const [title, setTitle] = useState<String>('');
   const [description, setDescription] = useState<String>('');
