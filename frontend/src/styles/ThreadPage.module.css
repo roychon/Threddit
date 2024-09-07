@@ -1,46 +1,30 @@
 .link,
 .link2 {
   font-size: 16px;
-  color: white;
+  color: #232323;
   text-decoration: none;
-  /* margin-top: 86px; */
-  margin-left: 130px;
-  margin-bottom: 20px;
   display: inline-block;
 }
 
 .link {
   cursor: pointer;
+  display: block;
   transition: 0.3s all ease;
+  padding: 30px 0px;
 }
 
 .link:hover {
   color: rgb(186, 186, 186);
 }
 
-.text {
-  margin-top: 50px;
+.link2 {
+  padding-bottom: 30px;
 }
 
 .container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.left {
-  display: flex;
-  flex-direction: column;
-}
-
-.right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -880px;
-  margin-right: 200px;
+  justify-content: space-around;
+  background-color: #e7e7e7;
 }
 
 .link2 {
@@ -49,14 +33,17 @@
 }
 
 .postContainer {
-  width: 700px;
+  width: 800px;
   height: 240px;
-  background-color: #232323;
+  background-color: #f2f2f2;
   margin-bottom: 20px;
-  margin-left: 130px;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: space-between;
   cursor: pointer;
+  color: black;
+}
+.postContainer:hover {
+  background-color: #efefef;
 }

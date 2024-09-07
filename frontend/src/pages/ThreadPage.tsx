@@ -67,43 +67,53 @@ const ThreadPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.text}>
-        <div className={styles.left}>
-          <Link to='/' className={styles.link}>
-            Back home
-          </Link>
-          <p className={styles.link2}>r/{threadInfo?.threadName}</p>
-        </div>
-        {posts &&
-          posts.map((post) => {
+      <div className={styles.posts}>
+        <Link to='/' className={styles.link}>
+          Back home
+        </Link>
+        <p className={styles.link2}>r/{threadInfo?.threadName}</p>
+        {posts.map((post, index) => {
+          if (index === posts.length - 1) {
             return (
               <div ref={lastPostRef} key={post._id}>
                 <DisplayPost
-                  className={styles.postContainer}
-                  key={post._id}
                   description={post.description}
                   title={post.title}
                   comments={post.comments}
                   likes={post.likes}
-                  threadName={post.threadName}
+                  threadName={'t/' + post.thread_id.title}
                   username={post.user_id.username}
-                  thread_id={post.thread_id}
+                  thread_id={post.thread_id._id}
+                  className={styles.postContainer}
                 />
               </div>
             );
-          })}
+          } else {
+            return (
+              <DisplayPost
+                key={post._id}
+                description={post.description}
+                title={post.title}
+                comments={post.comments}
+                likes={post.likes}
+                threadName={'t/' + post.thread_id.title}
+                username={post.user_id.username}
+                thread_id={post.thread_id._id}
+                className={styles.postContainer}
+              />
+            );
+          }
+        })}
       </div>
-      <div className={styles.right}>
-        {threadInfo && (
-          <AboutThread
-            threadID={threadInfo.threadID}
-            threadName={threadInfo.threadName}
-            numPosts={threadInfo.numPosts}
-            threadCreator={threadInfo.threadCreator}
-            numMembers={threadInfo.numMembers}
-          />
-        )}
-      </div>
+      {threadInfo && (
+        <AboutThread
+          threadID={threadInfo.threadID}
+          threadName={threadInfo.threadName}
+          numPosts={threadInfo.numPosts}
+          threadCreator={threadInfo.threadCreator}
+          numMembers={threadInfo.numMembers}
+        />
+      )}
     </div>
   );
 };

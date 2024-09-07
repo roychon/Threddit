@@ -84,7 +84,11 @@ const Nav = () => {
     <>
       <div className={styles.container}>
         <div className={styles.title}>
-          <div className={styles.titleCircle}></div>
+          <img
+            className={styles.logo}
+            src='https://www.ucraft.com/ai-logo-generator/app/_next/image?url=https%3A%2F%2Fstatic.ucraft.ai%2Ffs%2Flogos%2Fpng%2Ff15e5987-036f-4d83-88f4-f645bd29c81e%2Fmobile%2F69a39d3a-92e8-4c2c-ad08-36176d030e37.png%3F1725741000476&w=1080&q=75'
+            alt='Threddit Logo'
+          />
           <Link to={'/'} className={styles.titleName}>
             Threddit
           </Link>

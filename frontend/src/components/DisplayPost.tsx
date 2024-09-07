@@ -1,6 +1,6 @@
 import styles from '../styles/HomePage.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
 // import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,7 +34,7 @@ const DisplayPost = (props: DisplayPost) => {
         <div className={styles.topContainer}>
           <div className={styles.leftSection}>
             <FontAwesomeIcon icon={faHeart} className={styles.heart} />
-            <p className={styles.likes}>{props.likes} likes</p>
+            <p className={styles.likes}>{props.likes}</p>
           </div>
           <div className={styles.rightSection}>
             <div className={styles.rightTopContainer}>

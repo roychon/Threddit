@@ -6,7 +6,7 @@
 
 body {
   color: white;
-  background-color: #0f0f0f;
+  background: #e7e7e7;
 }
 
 input {
@@ -130,8 +130,12 @@ button:hover {
   font-size: 16px;
 }
 
+#create-post-btn:hover {
+  background-color: #565656;
+}
+
 #get-started {
-  background-color: #fff7f7;
+  background-color: #f2f2f2;
   width: 450px;
   height: 250px;
   border-radius: 10px;
@@ -151,6 +155,13 @@ button:hover {
   border: none;
   font-weight: bold;
   font-size: 20px;
+  color: rgb(214, 214, 214);
+  background-color: black;
+  transition: 0.3s all ease;
+}
+
+#home-pg-create-thread-btn:hover {
+  background-color: #565656;
 }
 
 #change-username {
@@ -180,9 +191,11 @@ button:hover {
 }
 
 #about-thread-component {
-  width: 400px;
+  width: 450px;
   height: 250px;
   padding: 20px;
   justify-content: space-around;
   font-size: 16px;
+  background-color: #f2f2f2;
+  margin-top: 160px;
 }
