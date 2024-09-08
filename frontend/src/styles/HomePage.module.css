@@ -186,23 +186,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: end;
-  margin-top: -20px;
+  justify-content: center;
 }
 
 .likes {
-  margin-top: 15px;
+  margin: 15px 0px;
 }
 
-.heart {
+.up {
   cursor: pointer;
-  color: red;
+  color: rgb(172, 172, 172);
   border-radius: 50%;
   transition: 0.4s all ease;
 }
 
-.heart:hover {
-  color: rgb(187, 51, 51);
+.up:hover {
+  color: rgb(246, 88, 3);
+}
+
+.down {
+  cursor: pointer;
+  color: rgb(172, 172, 172);
+  border-radius: 50%;
+  transition: 0.4s all ease;
+  transform: rotate(180deg);
+}
+
+.down:hover {
+  color: rgb(3, 87, 215);
 }
 
 .rightSection {
@@ -280,4 +291,12 @@
 
 .getStarted {
   margin-top: 110px;
+}
+
+.postedBy {
+  color: rgb(125, 117, 117);
+}
+
+.description {
+  color: #2d2d2d;
 }

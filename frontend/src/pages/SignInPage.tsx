@@ -48,7 +48,7 @@ const SignInPage = () => {
       navigate('/');
     } catch (error: any) {
       console.error('ERROR: ', error);
-      setError(error.response?.data || 'Unexpected error occurred');
+      setError(error.response?.data.message || 'Unexpected error occurred');
     }
   };
 

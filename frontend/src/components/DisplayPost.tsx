@@ -1,6 +1,8 @@
 import styles from '../styles/HomePage.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
+import { faUpLong } from '@fortawesome/free-solid-svg-icons';
+
 // import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,8 +35,9 @@ const DisplayPost = (props: DisplayPost) => {
       <div className={props.className}>
         <div className={styles.topContainer}>
           <div className={styles.leftSection}>
-            <FontAwesomeIcon icon={faHeart} className={styles.heart} />
+            <FontAwesomeIcon icon={faUpLong} className={styles.up} />
             <p className={styles.likes}>{props.likes}</p>
+            <FontAwesomeIcon icon={faUpLong} className={styles.down} />
           </div>
           <div className={styles.rightSection}>
             <div className={styles.rightTopContainer}>
@@ -42,7 +45,7 @@ const DisplayPost = (props: DisplayPost) => {
                 {props.threadName}
               </div>
               <div className={styles.circle}></div>
-              <p>Posted by {props.username}</p>
+              <p className={styles.postedBy}>Posted by {props.username}</p>
             </div>
             <h1
               className={styles.postTitle}
@@ -50,7 +53,7 @@ const DisplayPost = (props: DisplayPost) => {
             >
               {props.title}
             </h1>
-            <p>{props.description}</p>
+            <p className={styles.description}>{props.description}</p>
           </div>
         </div>
         <div className={styles.bottomSection}>

@@ -47,7 +47,6 @@ const HomePage: React.FC = () => {
             }
           })}
         </div>
-        {loading && <p>Loading more posts...</p>}
         <GetStarted />
       </div>
     </>
