@@ -8,12 +8,13 @@ import LoadingSpinner from '../loader/Spinner';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faUpLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CommentForm from '../components/CommentForm';
 
 interface Comment {
-  likes: ReactNode;
+  likes: React.ReactNode;
   _id: string;
   user_id: {
-    gradient: Background<string | number> | undefined;
+    gradient: string | undefined;
     username: string;
   };
   commentValue: string;
@@ -48,7 +49,6 @@ const PostPage: React.FC = () => {
         const response = await axios.get(`post/seepost/${postID}`);
         setPost(response.data.post);
         setLoading(false);
-        console.log(response);
       } catch (error) {
         console.error('Error fetching post:', error);
         setLoading(false);
@@ -84,7 +84,6 @@ const PostPage: React.FC = () => {
     }
   };
 
-  // Display the loading spinner while data is being fetched
   if (loading)
     return (
       <div className={styles.loader}>
@@ -92,7 +91,6 @@ const PostPage: React.FC = () => {
       </div>
     );
 
-  // Display the post content when loading is complete
   if (!post) return <p>No post found.</p>;
 
   return (
@@ -112,17 +110,11 @@ const PostPage: React.FC = () => {
         />
         <div className={styles.commentSection}>
           <p className={styles.text}>Add Comment</p>
-          <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
-            <input
-              type='text'
-              value={comment}
-              onChange={handleCommentChange}
-              className={styles.commentInput}
-            />
-            <button type='submit' className={styles.commentButton}>
-              Post
-            </button>
-          </form>
+          <CommentForm
+            comment={comment}
+            onCommentChange={handleCommentChange}
+            onCommentSubmit={handleCommentSubmit}
+          />
           {/* Display the comments */}
           <div className={styles.commentList}>
             {post.comments.map((comment) => (
