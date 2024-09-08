@@ -1,5 +1,11 @@
 :root {
-  --primary-text-color: rgb(237, 243, 241);
+  --primary-text-color: #232323;
+}
+
+.logo {
+  width: 35px;
+  height: 35px;
+  color: black;
 }
 
 .container {
@@ -9,9 +15,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 30px;
-  background: #000000;
-  background: -webkit-linear-gradient(to left, #434343, #000000);
-  background: linear-gradient(to left, #434343, #000000);
+  background: #e7e7e7;
+  border-bottom: 1px solid rgb(213, 213, 213);
 }
 
 .title {
@@ -20,6 +25,13 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.titleName {
+  text-decoration: none;
+  color: var(--primary-text-color);
+  font-size: 24px;
+  color: #232323;
 }
 
 .circle {
@@ -34,10 +46,74 @@
   justify-content: start;
   align-items: center;
   padding: 20px;
-  background-color: #d9d9d9;
+  background-color: #ededed;
   border-radius: 8px;
   width: 762px;
   height: 40px;
+  position: relative;
+}
+
+.inputColumn {
+  width: 100%;
+}
+
+.threadsContainer {
+  position: absolute;
+  top: 0%;
+  left: 0;
+  /* height: 100px; */
+  width: 100%;
+  background-color: #ededed;
+  border: 1px solid #ddd;
+  border-top: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+  border-radius: 8px;
+  color: black;
+}
+
+.threadsContainer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.threadsContainer li {
+  padding: 8px 12px; /* Add some padding for each item */
+  padding-left: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+.threadsContainer li:first-child {
+  padding: 8px 12px;
+  border: none;
+  color: #ededed;
+}
+
+.threadsContainer li:last-child {
+  border-bottom: none; /* Remove the bottom border from the last item */
+}
+
+.threads {
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ededed;
+}
+
+.threads a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.threads p:first-child {
+  font-size: 14px;
+}
+
+.threads p:last-child {
+  font-size: 11px;
+  color: grey;
 }
 
 .searchBar,
@@ -45,6 +121,8 @@
   outline: none;
   border: none;
   background-color: transparent;
+  position: relative;
+  z-index: 100;
 }
 
 .searchButton:hover {
@@ -73,26 +151,27 @@
 }
 
 .postContainer {
-  width: 700px;
+  width: 800px;
   height: 240px;
-  background-color: #232323;
-  margin-bottom: 10px;
-  margin-left: 130px;
+  background-color: #f2f2f2;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  align-items: start;
   justify-content: space-between;
   cursor: pointer;
+  color: black;
 }
 
 .postContainer:hover {
-  background-color: #3f3f3f;
+  background-color: #dadada;
 }
 
 .yourFeed {
-  margin-left: 300px;
+  /* margin-left: 280px; */
   font-size: 40px;
   font-weight: bolder;
-  color: var(--primary-text-color);
+  color: #232323;
   padding: 30px 0px;
 }
 
@@ -107,23 +186,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: end;
-  margin-top: -20px;
+  justify-content: center;
 }
 
 .likes {
-  margin-top: 15px;
+  margin: 15px 0px;
 }
 
-.heart {
+.up {
   cursor: pointer;
-  color: white;
+  color: rgb(172, 172, 172);
   border-radius: 50%;
   transition: 0.4s all ease;
 }
 
-.heart:hover {
-  color: rgb(187, 51, 51);
+.up:hover {
+  color: rgb(246, 88, 3);
+}
+
+.down {
+  cursor: pointer;
+  color: rgb(172, 172, 172);
+  border-radius: 50%;
+  transition: 0.4s all ease;
+  transform: rotate(180deg);
+}
+
+.down:hover {
+  color: rgb(3, 87, 215);
 }
 
 .rightSection {
@@ -157,23 +247,25 @@
 .threadName {
   margin-right: 10px;
   text-decoration: none;
-  color: rgb(255, 255, 255);
-  transition: 0.2s all ease;
+  color: rgb(0, 0, 0);
+  transition: 0.4s all ease;
+  text-decoration: underline;
 }
 
 .threadName:hover {
-  text-decoration: underline;
-  color: rgba(0, 0, 255, 0.8);
+  color: rgb(38, 0, 228);
 }
 
 .postTitle {
   font-weight: bolder;
   font-size: 24px;
   margin-bottom: 10px;
+  color: black;
 }
 
 .bottomSection {
   height: 45px;
+  width: 100%;
   border-top: 1px solid white;
   display: flex;
   align-items: center;
@@ -192,4 +284,40 @@
 .homePageContainer {
   display: flex;
   justify-content: space-around;
+  background-color: #e7e7e7;
+}
+
+.profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.getStarted {
+  margin-top: 110px;
+}
+
+.postedBy {
+  color: rgb(125, 117, 117);
+}
+
+.description {
+  color: #2d2d2d;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 25px;
+  padding: 50px;
+}
+
+.profilePic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin-right: 80px;
 }

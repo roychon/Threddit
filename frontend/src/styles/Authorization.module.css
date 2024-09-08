@@ -103,7 +103,7 @@
 
 .span {
   margin-left: 5px;
-  text-decoration: underline;
+  font-weight: bolder;
   cursor: pointer;
   transition: 0.3s all ease;
 }
@@ -123,4 +123,18 @@
 .username {
   display: flex;
   flex-direction: column;
+}
+
+.toggleButton {
+  cursor: pointer;
+  position: absolute;
+  right: 25px;
+  font-size: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(85, 85, 85);
+}
+
+.inputBox {
+  position: relative;
 }

@@ -1,40 +1,46 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
-import { checkAuthStatus } from "../helpers/backendCommicators";
-import { Types } from "mongoose"
+import { createContext, useEffect, useState, ReactNode } from 'react';
+import { checkAuthStatus } from '../helpers/backendCommicators';
+import { Types } from 'mongoose';
 
 interface User {
-    username: String,
-    _id: Types.ObjectId
+  username: string;
+  _id: Types.ObjectId;
+  gradient: string;
 }
 
 interface UserAuth {
-    user: User | null,
-    isLoggedIn: Boolean | null
+  user: User | null;
+  isLoggedIn: boolean | null;
+  setIsLoggedIn: (status: boolean) => void;
+  setUser: (user: User | null) => void;
 }
 
-const AuthContext = createContext<UserAuth | null>(null)
+const AuthContext = createContext<UserAuth | null>(null);
 
-const AuthProvider = ({children}: {children: ReactNode}) => {
-    const [isLoggedIn, setIsLoggedIn] = useState<Boolean | null>(null)
-    const [user, setUser] = useState<User | null>(null)
-    useEffect(() => {
-        const initialAuthCheck = async () => {
-            try {
-                const res = await checkAuthStatus() // uses verifyToken middleware to validate jwt
-                const {username, id} = res.data
-                setIsLoggedIn(true)
-                setUser({username, _id: id})
-            } catch (e) {
-                console.log("Initial auth check failed; user must log in")
-                setIsLoggedIn(false)
-            }
-        }
-        initialAuthCheck()
-    }, [])
+const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
-    return <AuthContext.Provider value={{user, isLoggedIn}}>{children}</AuthContext.Provider>
-}
- 
+  useEffect(() => {
+    const initialAuthCheck = async () => {
+      try {
+        const res = await checkAuthStatus();
+        const { username, id, gradient } = res.data;
+        setIsLoggedIn(true);
+        setUser({ username, _id: id, gradient });
+      } catch (e) {
+        setIsLoggedIn(false);
+      }
+    };
+    initialAuthCheck();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, isLoggedIn, setIsLoggedIn, setUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
 export default AuthProvider;
-
-export { AuthContext }
+export { AuthContext };

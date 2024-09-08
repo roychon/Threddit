@@ -40,7 +40,7 @@ function authenticateToken(req, res, next) {
   if (!token) return res.sendStatus(401);
   try {
     const data = jwt.verify(token, process.env.ACCESS_TOKEN);
-    console.log("verified")
+    console.log('verified');
     req.username = data.name;
     return next();
   } catch {
@@ -51,13 +51,13 @@ function authenticateToken(req, res, next) {
 
 const createUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, gradient } = req.body;
 
     validatePassword(password);
     validateUsername(username);
 
     const hasedPassword = await bcrypt.hash(password, 10);
-    await User.create({ username, password: hasedPassword });
+    await User.create({ username, password: hasedPassword, gradient });
 
     const user = { name: username, password };
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN);
@@ -116,10 +116,10 @@ const loginUser = async (req, res) => {
 };
 
 const verifyUser = async (req, res) => {
-  const { username } = req
-  const user = await User.findOne({username})
-  if (!user) return res.status(404).send("User not found")
-  return res.json({id: user._id, username: user.username})
-}
+  const { username } = req;
+  const user = await User.findOne({ username });
+  if (!user) return res.status(404).send('User not found');
+  return res.json({ id: user._id, username: user.username });
+};
 
 module.exports = { createUser, loginUser, authenticateToken, verifyUser };

@@ -1,50 +1,56 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import Nav from '../components/Nav';
-import axios from '../helpers/axios';
 import DisplayPost from '../components/DisplayPost';
 import styles from '../styles/HomePage.module.css';
 import GetStarted from '../components/GetStarted';
+import useInfiniteScrollPosts from '../hooks/usePostInfiniteScroll';
+import LoadingSpinner from '../loader/Spinner';
 
-const HomePage = () => {
-  // Write in TypeScript
-  const [initialPosts, setInitialPosts] = useState(null);
-
-  // On mount, fetch the top 5 liked posts, then set it to initialPosts
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get('/post');
-        console.log(response.data.posts);
-        setInitialPosts(response.data.posts);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+const HomePage: React.FC = () => {
+  const { posts, lastPostRef, loading } = useInfiniteScrollPosts(1, '/post');
 
   return (
     <>
       <Nav />
-      <h1 className={styles.yourFeed}>Your Feed</h1>
       <div className={styles.homePageContainer}>
         <div className='posts'>
-          {initialPosts &&
-            initialPosts.map((post) => {
+          <h1 className={styles.yourFeed}>Your Feed</h1>
+          {posts.map((post, index) => {
+            if (index === posts.length - 1) {
+              return (
+                <div ref={lastPostRef} key={post._id}>
+                  <DisplayPost
+                    postId={post._id}
+                    description={post.description}
+                    title={post.title}
+                    comments={post.comments}
+                    likes={post.likes}
+                    threadName={'t/' + post.thread_id.title}
+                    username={post.user_id.username}
+                    thread_id={post.thread_id._id}
+                    className={styles.postContainer}
+                  />
+                </div>
+              );
+            } else {
               return (
                 <DisplayPost
                   key={post._id}
+                  postId={post._id}
                   description={post.description}
                   title={post.title}
                   comments={post.comments}
                   likes={post.likes}
-                  threadName={"t/" + post.thread_id.title}
+                  threadName={'t/' + post.thread_id.title}
                   username={post.user_id.username}
                   thread_id={post.thread_id._id}
+                  className={styles.postContainer}
                 />
               );
-            })}
+            }
+          })}
+          {/* Display the loading spinner while posts are being fetched */}
+          <div className={styles.loader}>{loading && <LoadingSpinner />}</div>
         </div>
         <GetStarted />
       </div>

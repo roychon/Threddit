@@ -1,0 +1,58 @@
+.link,
+.link2 {
+  font-size: 16px;
+  color: #232323;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.link {
+  cursor: pointer;
+  display: block;
+  transition: 0.3s all ease;
+  padding: 30px 0px;
+}
+
+.link:hover {
+  color: rgb(186, 186, 186);
+}
+
+.link2 {
+  padding-bottom: 30px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  background-color: #e7e7e7;
+}
+
+.link2 {
+  font-size: 36px;
+  font-weight: bolder;
+}
+
+.postContainer {
+  width: 800px;
+  height: 240px;
+  background-color: #f2f2f2;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  cursor: pointer;
+  color: black;
+}
+
+.postContainer:hover {
+  background-color: #dadada;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 25px;
+  padding: 20px;
+}

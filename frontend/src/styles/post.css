@@ -6,7 +6,7 @@
 
 body {
   color: white;
-  background-color: #0f0f0f;
+  background: #e7e7e7;
 }
 
 input {
@@ -26,6 +26,8 @@ button:hover {
 .white-div {
   background-color: #ffffff;
   color: #0a0a0a;
+  width: 416px;
+  height: 265px;
 }
 
 .red {
@@ -77,6 +79,8 @@ button:hover {
   background-color: #ffffff;
   padding: 25px 30px;
   justify-content: space-between;
+  margin-top: 50px;
+  margin-left: 50px;
 }
 
 #create-form *:not(button) {
@@ -126,8 +130,12 @@ button:hover {
   font-size: 16px;
 }
 
+#create-post-btn:hover {
+  background-color: #565656;
+}
+
 #get-started {
-  background-color: #fff7f7;
+  background-color: #f2f2f2;
   width: 450px;
   height: 250px;
   border-radius: 10px;
@@ -147,6 +155,13 @@ button:hover {
   border: none;
   font-weight: bold;
   font-size: 20px;
+  color: rgb(214, 214, 214);
+  background-color: black;
+  transition: 0.3s all ease;
+}
+
+#home-pg-create-thread-btn:hover {
+  background-color: #565656;
 }
 
 #change-username {
@@ -176,9 +191,31 @@ button:hover {
 }
 
 #about-thread-component {
-  width: 400px;
-  height: 250px;
+  width: 450px;
+  height: 350px;
   padding: 20px;
   justify-content: space-around;
   font-size: 16px;
+  background-color: #f2f2f2;
+  margin-top: 160px;
+  position: sticky;
+  top: 10px;
+}
+
+.createdBy,
+.members,
+.postsNum {
+  display: flex;
+  justify-content: space-between;
+  color: grey;
+}
+
+.createPost {
+  background-color: rgb(192, 192, 192);
+  color: black;
+  transition: 0.3s all ease;
+}
+
+.createPost:hover {
+  color: white;
 }

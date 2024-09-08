@@ -8,6 +8,7 @@ const UserSchema = new Schema({
   comments: [Schema.Types.ObjectId],
   threads_joined: [Schema.Types.ObjectId],
   threads_created: [Schema.Types.ObjectId],
+  gradient: { type: String, unique: true },
 });
 
 module.exports = mongoose.model('User', UserSchema);

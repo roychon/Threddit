@@ -5,6 +5,8 @@ import FormInput from '../components/FormInput';
 import FormPrompt from '../components/FormPrompt';
 import { ChangeEvent, useState } from 'react';
 import axios from '../helpers/axios';
+import { AuthContext } from '../context/AuthProvider';
+import { useContext } from 'react';
 
 const SignUpPage = () => {
   // State
@@ -13,35 +15,63 @@ const SignUpPage = () => {
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [userError, setUserError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  // Context
+  const authContext = useContext(AuthContext);
+
+  const generateRandomGradient = (): string => {
+    const color1 = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    const color2 = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    return `linear-gradient(${Math.floor(
+      Math.random() * 360
+    )}deg, ${color1}, ${color2})`;
+  };
 
   // Setters
   const handleUserNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setUserNameText(e.target.value);
   };
+
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setPasswordText(e.target.value);
   };
 
   // Events
   const onClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setPasswordError('');
     setUserError('');
-    e.preventDefault();
-    // Send data to backend
+    // Generate a random gradient and create the profile picture
+    const gradient = generateRandomGradient();
+
     try {
       const response = await axios.post('/sign-up', {
         username: usernameText,
         password: passwordText,
+        gradient: gradient,
       });
+
       console.log(response);
       setUserNameText('');
       setPasswordText('');
       setError('');
-      navigate("/")
-    } catch (error) {
+
+      // Update AuthContext state here if needed
+      if (authContext) {
+        authContext.setIsLoggedIn(true);
+        authContext.setUser({
+          username: usernameText,
+          _id: response.data.id,
+          gradient: gradient,
+        });
+      }
+
+      // Navigate to homepage on successful sign-up
+      navigate('/');
+    } catch (error: any) {
       console.error(error);
-      const errorMessage = error.response.data || 'Unexpected error occurred';
+      const errorMessage = error.response?.data || 'Unexpected error occurred';
 
       if (errorMessage.includes('Password')) {
         setPasswordError(
@@ -57,51 +87,48 @@ const SignUpPage = () => {
     }
   };
 
-  // const navigate = useNavigate();
   const handleClick = () => {
     navigate('/login');
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <form className={styles.signUpForm}>
-          <FormTitle
-            title='Create An Account'
-            message='Create an account to enjoy all the services without any ads for free!'
-          />
-          <div className='username'>
-            <FormInput
-              type='text'
-              name='username'
-              placeholder='Username'
-              value={usernameText}
-              onChange={handleUserNameChange}
-              className={!userError ? styles.input : styles.inputError}
-            />
-            {userError && <div className={styles.error}>{userError}</div>}
-          </div>
+    <div className={styles.container}>
+      <form className={styles.signUpForm}>
+        <FormTitle
+          title='Create An Account'
+          message='Create an account to enjoy all the services without any ads for free!'
+        />
+        <div className='username'>
           <FormInput
-            type='password'
-            name='password'
-            placeholder='Password'
-            value={passwordText}
-            onChange={handlePasswordChange}
-            className={!passwordError ? styles.input : styles.inputError}
+            type='text'
+            name='username'
+            placeholder='Username'
+            value={usernameText}
+            onChange={handleUserNameChange}
+            className={!userError ? styles.input : styles.inputError}
           />
-          {passwordError && <div className={styles.error}>{passwordError}</div>}
-          {error && <div className={styles.error}>{error}</div>}
-          <button type='submit' className={styles.button} onClick={onClick}>
-            Create Account
-          </button>
-          <FormPrompt
-            text='Already Have an Account?'
-            prompt='Log In'
-            handleClick={handleClick}
-          />
-        </form>
-      </div>
-    </>
+          {userError && <div className={styles.error}>{userError}</div>}
+        </div>
+        <FormInput
+          type='password'
+          name='password'
+          placeholder='Password'
+          value={passwordText}
+          onChange={handlePasswordChange}
+          className={!passwordError ? styles.input : styles.inputError}
+        />
+        {passwordError && <div className={styles.error}>{passwordError}</div>}
+        {error && <div className={styles.error}>{error}</div>}
+        <button type='submit' className={styles.button} onClick={onClick}>
+          Create Account
+        </button>
+        <FormPrompt
+          text='Already Have an Account?'
+          prompt='Log In'
+          handleClick={handleClick}
+        />
+      </form>
+    </div>
   );
 };
 
