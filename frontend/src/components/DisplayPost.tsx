@@ -60,8 +60,16 @@ const DisplayPost = (props: DisplayPost) => {
     }
   };
 
-  const handleUpvote = () => handleVote('up');
-  const handleDownvote = () => handleVote('down');
+  const handleUpvote = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    handleVote('up');
+  };
+  const handleDownvote = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    handleVote('down');
+  };
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -78,7 +86,7 @@ const DisplayPost = (props: DisplayPost) => {
               <FontAwesomeIcon
                 icon={faUpLong}
                 className={styles.up}
-                onClick={handleUpvote}
+                onClick={(e) => handleUpvote(e)}
               />
               <p className={styles.likes}>{likes}</p>
               <FontAwesomeIcon
