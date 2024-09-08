@@ -38,8 +38,9 @@ interface Post {
 const PostPage: React.FC = () => {
   const { postID } = useParams<{ postID: string }>();
   const [post, setPost] = useState<Post | null>(null);
-  const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(true);
+  const [replyForms, setReplyForms] = useState<Record<string, string>>({}); // Separate state for each reply form
+  const [visibleReplyForm, setVisibleReplyForm] = useState<string | null>(null); // Track visibility
   const authContext = useContext(AuthContext);
   const userId = authContext?.user?._id;
 
@@ -58,11 +59,14 @@ const PostPage: React.FC = () => {
     fetchPost();
   }, [postID]);
 
-  const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setComment(e.target.value);
+  const handleCommentChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    commentId: string
+  ) => {
+    setReplyForms((prev) => ({ ...prev, [commentId]: e.target.value }));
   };
 
-  const handleCommentSubmit = async (e: React.FormEvent) => {
+  const handleCommentSubmit = async (e: React.FormEvent, parentId: string) => {
     e.preventDefault();
 
     if (!userId) {
@@ -72,16 +76,22 @@ const PostPage: React.FC = () => {
 
     try {
       await axios.post(`/post/comments/${postID}`, {
-        commentValue: comment,
+        commentValue: replyForms[parentId],
         postID,
         userId,
+        parentId,
       });
-      setComment('');
+      setReplyForms((prev) => ({ ...prev, [parentId]: '' })); // Clear the reply form input
+      setVisibleReplyForm(null); // Hide the reply form after submission
       const response = await axios.get(`/post/seepost/${postID}`);
       setPost(response.data.post);
     } catch (error) {
       console.error('Error posting comment:', error);
     }
+  };
+
+  const toggleReplyForm = (commentId: string) => {
+    setVisibleReplyForm((prev) => (prev === commentId ? null : commentId));
   };
 
   if (loading)
@@ -111,9 +121,9 @@ const PostPage: React.FC = () => {
         <div className={styles.commentSection}>
           <p className={styles.text}>Add Comment</p>
           <CommentForm
-            comment={comment}
-            onCommentChange={handleCommentChange}
-            onCommentSubmit={handleCommentSubmit}
+            comment={replyForms['']} // Use empty string for top-level comment form
+            onCommentChange={(e) => handleCommentChange(e, '')}
+            onCommentSubmit={(e) => handleCommentSubmit(e, '')}
           />
           {/* Display the comments */}
           <div className={styles.commentList}>
@@ -140,9 +150,23 @@ const PostPage: React.FC = () => {
                   <FontAwesomeIcon
                     icon={faComment}
                     className={styles.commentIcon}
+                    onClick={() => toggleReplyForm(comment._id)}
                   />
                   <p className={styles.reply}>reply</p>
                 </div>
+                {visibleReplyForm === comment._id && (
+                  <div className={styles.replyFormContainer}>
+                    <CommentForm
+                      comment={replyForms[comment._id] || ''} // Default to empty string if no reply
+                      onCommentChange={(e) =>
+                        handleCommentChange(e, comment._id)
+                      }
+                      onCommentSubmit={(e) =>
+                        handleCommentSubmit(e, comment._id)
+                      }
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </div>

@@ -37,7 +37,7 @@
 }
 
 .commentInput {
-  width: 700px;
+  width: 88%;
   height: 63px;
   border: none;
   border-radius: 10px;
@@ -92,9 +92,11 @@
 
 .comment {
   width: 800px;
-  height: 150px;
+  /* height: 150px; */
+  padding-bottom: 20px;
   background-color: #f2f2f2;
   border-top: 1px solid white;
+  position: relative;
 }
 .comment:last-of-type {
   margin-bottom: 200px;
@@ -170,5 +172,24 @@
   display: flex;
   align-items: center;
   margin-left: 50px;
-  margin-top: 10px;
+  margin-top: 20px;
+}
+
+.replyFormContainer {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f1f1f1; /* Light background for replies */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: calc(
+    90% - 20px
+  ); /* Adjust width to fit inside the comment container */
+  margin-left: 50px; /* Indent to show it's a reply */
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
