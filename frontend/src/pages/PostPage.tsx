@@ -10,8 +10,10 @@ import { faUpLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Comment {
+  likes: ReactNode;
   _id: string;
   user_id: {
+    gradient: Background<string | number> | undefined;
     username: string;
   };
   commentValue: string;
@@ -125,7 +127,19 @@ const PostPage: React.FC = () => {
           <div className={styles.commentList}>
             {post.comments.map((comment) => (
               <div key={comment._id} className={styles.comment}>
-                <p className={styles.commentBy}>u/{comment.user_id.username}</p>
+                <div className={styles.topLeft}>
+                  <div
+                    className={styles.circle}
+                    style={{
+                      background: comment.user_id.gradient
+                        ? comment.user_id.gradient
+                        : 'white',
+                    }}
+                  ></div>
+                  <p className={styles.commentBy}>
+                    u/{comment.user_id.username}
+                  </p>
+                </div>
                 <p className={styles.commentValue}>{comment.commentValue}</p>
                 <div className={styles.icons}>
                   <FontAwesomeIcon icon={faUpLong} className={styles.up} />
