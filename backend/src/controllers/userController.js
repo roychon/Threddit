@@ -105,7 +105,7 @@ const loginUser = async (req, res) => {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production',
         })
-        .json({ message: 'Logged in successfully' });
+        .json(user);
     } else {
       return res.status(401).json({ message: 'Invalid username or password.' });
     }
