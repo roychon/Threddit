@@ -26,6 +26,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const res = await checkAuthStatus();
         const { username, id, gradient } = res.data;
+        console.log(gradient)
         setIsLoggedIn(true);
         setUser({ username, _id: id, gradient });
       } catch (e) {
