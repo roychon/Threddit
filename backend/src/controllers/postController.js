@@ -157,11 +157,12 @@ const getPostById = async (req, res) => {
 
     // Populate thread_id, user_id, and comments (including the user details for each comment)
     const post = await Post.findById(postID)
-      .populate('user_id', 'username') // Populate the post's user details
-      .populate('thread_id', 'title') // Populate the thread details if needed
+      .populate('user_id', 'username gradient') // Populate the post's user details
+      .populate('thread_id', 'title')
+      .populate('thread_id user_id') // Populate the thread details if needed
       .populate({
         path: 'comments',
-        populate: { path: 'user_id', select: 'username' }, // Populate each comment's user details
+        populate: { path: 'user_id', select: 'username gradient' }, // Populate each comment's user details
       });
 
     if (!post) return res.status(404).json({ message: 'Post not found' });
