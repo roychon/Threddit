@@ -13,6 +13,7 @@ interface Post {
     title: string;
   };
   user_id: {
+    gradient: string;
     username: string;
   };
 }

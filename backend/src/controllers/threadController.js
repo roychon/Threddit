@@ -126,7 +126,7 @@ const getThreadPosts = async (req, res) => {
     const numPosts = thread.posts.length;
 
     const threadPosts = await Post.find({ thread_id: threadID })
-      .populate('user_id', 'username')
+      .populate('thread_id user_id')
       .sort({ likes: -1 })
       .skip(skip) // Skip the number of posts based on the current page
       .limit(parseInt(limit)); // Limit the number of posts returned

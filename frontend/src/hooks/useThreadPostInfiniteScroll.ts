@@ -13,6 +13,7 @@ interface Post {
     title: string;
   };
   user_id: {
+    gradient: string;
     username: string;
   };
 }
@@ -30,6 +31,7 @@ const useInfiniteScrollPosts = (initialPage: number, endpoint: string) => {
     try {
       console.log(`Fetching posts for page ${page}`); // Log when fetching starts
       const response = await axios.get(`${endpoint}?page=${page}&limit=5`);
+      console.log(response.data);
       console.log(`Fetched ${response.data.threadPosts.length} posts`); // Log the number of posts fetched
       setPosts((prevPosts) => [...prevPosts, ...response.data.threadPosts]);
       setHasMore(response.data.hasMore); // Set hasMore based on response

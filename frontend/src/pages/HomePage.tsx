@@ -29,6 +29,7 @@ const HomePage: React.FC = () => {
                     username={post.user_id.username}
                     thread_id={post.thread_id._id}
                     className={styles.postContainer}
+                    gradient={post.user_id.gradient}
                   />
                 </div>
               );
@@ -45,6 +46,7 @@ const HomePage: React.FC = () => {
                   username={post.user_id.username}
                   thread_id={post.thread_id._id}
                   className={styles.postContainer}
+                  gradient={post.user_id.gradient}
                 />
               );
             }

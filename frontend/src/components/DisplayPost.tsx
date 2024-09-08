@@ -25,6 +25,7 @@ interface DisplayPost {
   likes: number;
   thread_id: any;
   postId: any;
+  gradient: string;
 }
 
 const DisplayPost = (props: DisplayPost) => {
@@ -103,7 +104,11 @@ const DisplayPost = (props: DisplayPost) => {
                 >
                   {props.threadName}
                 </div>
-                <div className={styles.circle}></div>
+                <div
+                  className={styles.circle}
+                  style={{ background: props.gradient }}
+                ></div>
+
                 <p className={styles.postedBy}>Posted by {props.username}</p>
               </div>
               <h1 className={styles.postTitle}>{props.title}</h1>
