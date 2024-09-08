@@ -9,10 +9,11 @@ import {
   useState,
 } from 'react';
 import axios from '../helpers/axios';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 
 const Nav = () => {
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState<string>('');
   const [threads, setThreads] = useState<any>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -97,6 +98,15 @@ const Nav = () => {
     setShowMenu(false);
   };
 
+  const handleSignOut = async () => {
+    try {
+      await axios.post('/signOut');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -152,13 +162,13 @@ const Nav = () => {
             <div className={styles.dropdownMenu}>
               <ul>
                 <li>
-                  <Link to='/threads'>Threads</Link>
+                  <Link to='/myThreads'>Threads</Link>
                 </li>
                 <li>
-                  <Link to='/settings'>Settings</Link>
+                  <Link to='/change-username'>Settings</Link>
                 </li>
                 <li>
-                  <Link to='/signout'>Sign Out</Link>
+                  <button onClick={handleSignOut}>Sign Out</button>
                 </li>
               </ul>
             </div>

@@ -345,18 +345,32 @@
 .dropdownMenu li {
   padding: 8px 12px;
   border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .dropdownMenu li:last-child {
   border-bottom: none;
 }
 
-.dropdownMenu a {
+.dropdownMenu li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdownMenu a,
+.dropdownMenu button {
   text-decoration: none;
   color: black;
   display: block;
+  width: 100%;
+  height: 100%;
+  padding: 8px 12px;
+  background-color: transparent;
+  border: none;
+  text-align: left;
 }
 
-.dropdownMenu a:hover {
-  background-color: #f0f0f0;
+.dropdownMenu a:hover,
+.dropdownMenu button:hover {
+  background-color: transparent; /* Remove default hover on anchor/button */
 }
