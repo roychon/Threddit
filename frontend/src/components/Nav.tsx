@@ -6,7 +6,6 @@ import {
   FocusEvent,
   useContext,
   useEffect,
-  useLayoutEffect,
   useState,
 } from 'react';
 import axios from '../helpers/axios';
@@ -17,7 +16,8 @@ const Nav = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [threads, setThreads] = useState<any>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [profilePicStyle, setProfilePicStyle] = useState<Object>({})
+  const [profilePicStyle, setProfilePicStyle] = useState<Object>({});
+  const [showMenu, setShowMenu] = useState<boolean>(false);
   const location = useLocation();
 
   // Context
@@ -25,27 +25,22 @@ const Nav = () => {
 
   useEffect(() => {
     if (authContext?.user?.gradient) {
-      console.log("in layoutEffect: ", authContext)
-      setProfilePicStyle({background: authContext!.user!.gradient})
+      setProfilePicStyle({ background: authContext!.user!.gradient });
     }
-  }, [authContext])
+  }, [authContext]);
 
-  // On mount and when the keywords change, fetch from the backend:
   useEffect(() => {
-    const controller = new AbortController(); // Create a new AbortController instance
+    const controller = new AbortController();
 
     if (keyword.length > 0 && isFocused) {
       const fetchThreads = async () => {
         try {
-          console.log('Fetching threads with keyword:', keyword);
           const response = await axios.post(
             '/thread/search-bar',
             { keyword: keyword },
-            { signal: controller.signal } // Pass the signal for cancellation
+            { signal: controller.signal }
           );
-          console.log('Response received:', response.data.threads);
           setThreads(response.data.threads);
-          console.log(threads);
         } catch (e) {
           if (e.name === 'AbortError') {
             console.log('Request canceled');
@@ -57,18 +52,15 @@ const Nav = () => {
 
       fetchThreads();
     } else {
-      console.log('No keyword or not focused');
       setThreads([]);
     }
 
     return () => {
-      console.log('Aborting request');
-      controller.abort(); // Cancel the request if the component unmounts or dependencies change
+      controller.abort();
     };
   }, [keyword, isFocused]);
 
   useEffect(() => {
-    // Reset the keyword whenever the route changes
     setKeyword('');
   }, [location]);
 
@@ -78,7 +70,6 @@ const Nav = () => {
 
   const handleEnter = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && keyword) {
-      // We can navigate them to a different page, and use the code below to useEffect once the page mounts to display. (Like HomePage)
       try {
         const response = await axios.post('/post/keyword', {
           keyword: keyword,
@@ -95,14 +86,16 @@ const Nav = () => {
   };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement, Element>): void => {
-    // setIsFocused(false);
     e.preventDefault();
   };
 
-  // Get user's gradient from context
-  // const profilePicStyle = authContext?.user?.gradient
-  //   ? { background: authContext.user.gradient }
-  //   : { background: 'red' };
+  const handleMouseEnter = (): void => {
+    setShowMenu(true);
+  };
+
+  const handleMouseLeave = (): void => {
+    setShowMenu(false);
+  };
 
   return (
     <>
@@ -136,22 +129,41 @@ const Nav = () => {
               <div className={styles.threadsContainer}>
                 <ul>
                   <li>b</li>
-                  {threads.map((thread: any) => {
-                    return (
-                      <li key={thread._id} className={styles.threads}>
-                        <Link to={`/thread/${thread._id}`}>
-                          <p>t/{thread.title}</p>
-                          <p>Members: {thread.members.length}</p>
-                        </Link>
-                      </li>
-                    );
-                  })}
+                  {threads.map((thread: any) => (
+                    <li key={thread._id} className={styles.threads}>
+                      <Link to={`/thread/${thread._id}`}>
+                        <p>t/{thread.title}</p>
+                        <p>Members: {thread.members.length}</p>
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}
           </div>
         </div>
-        <div className={styles.profilePic} style={profilePicStyle}></div>
+        <div
+          className={styles.profilePic}
+          style={profilePicStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {showMenu && (
+            <div className={styles.dropdownMenu}>
+              <ul>
+                <li>
+                  <Link to='/threads'>Threads</Link>
+                </li>
+                <li>
+                  <Link to='/settings'>Settings</Link>
+                </li>
+                <li>
+                  <Link to='/signout'>Sign Out</Link>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
