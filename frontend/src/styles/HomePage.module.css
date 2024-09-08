@@ -164,7 +164,7 @@
 }
 
 .postContainer:hover {
-  background-color: #efefef;
+  background-color: #dadada;
 }
 
 .yourFeed {
@@ -248,8 +248,12 @@
   margin-right: 10px;
   text-decoration: none;
   color: rgb(0, 0, 0);
-  transition: 0.2s all ease;
+  transition: 0.4s all ease;
   text-decoration: underline;
+}
+
+.threadName:hover {
+  color: rgb(38, 0, 228);
 }
 
 .postTitle {

@@ -54,6 +54,56 @@ const joinThread = async (req, res) => {
   }
 };
 
+const leaveThread = async (req, res) => {
+  const { userID, threadID } = req.body;
+  try {
+    const thread = await Threads.findOne({ _id: threadID });
+    if (!thread) return res.status(404).send('Thread not found');
+
+    const user = await User.findOne({ _id: userID });
+    if (!user) return res.status(404).send('User not found');
+
+    if (!thread.members.includes(user._id))
+      return res.status(401).send('User is not a member of this thread');
+
+    // Remove user from the thread
+    thread.members = thread.members.filter(
+      (member) => member.toString() !== user._id.toString()
+    );
+    // Remove thread from the user
+    user.threads_joined = user.threads_joined.filter(
+      (thread) => thread.toString() !== threadID.toString()
+    );
+
+    await user.save();
+    await thread.save();
+
+    return res.send('User successfully left thread');
+  } catch (e) {
+    console.error(e);
+    return res.status(500).send('Error leaving thread');
+  }
+};
+
+const checkMembership = async (req, res) => {
+  const { userID, threadID } = req.query;
+  try {
+    const thread = await Threads.findOne({ _id: threadID });
+    if (!thread) return res.status(404).send('Thread not found');
+
+    const user = await User.findOne({ _id: userID });
+    if (!user) return res.status(404).send('User not found');
+
+    // Check if the user is a member of the thread
+    const isMember = thread.members.includes(user._id);
+
+    return res.json({ isMember });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).send('Error checking membership');
+  }
+};
+
 const getThreadName = async (req, res) => {
   const { threadID } = req.params;
   try {
@@ -102,6 +152,8 @@ module.exports = {
   searchKeyword,
   createThread,
   joinThread,
+  leaveThread,
+  checkMembership,
   getThreadName,
   getThreadPosts,
 };

@@ -192,10 +192,28 @@ button:hover {
 
 #about-thread-component {
   width: 450px;
-  height: 250px;
+  height: 350px;
   padding: 20px;
   justify-content: space-around;
   font-size: 16px;
   background-color: #f2f2f2;
   margin-top: 160px;
+}
+
+.createdBy,
+.members,
+.postsNum {
+  display: flex;
+  justify-content: space-between;
+  color: grey;
+}
+
+.createPost {
+  background-color: rgb(192, 192, 192);
+  color: black;
+  transition: 0.3s all ease;
+}
+
+.createPost:hover {
+  color: white;
 }

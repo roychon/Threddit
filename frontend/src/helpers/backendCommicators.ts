@@ -62,10 +62,42 @@ const joinThread = async (userID: any, threadID: any) => {
   }
 };
 
+const leaveThread = async (userID: string, threadID: string) => {
+  try {
+    const response = await axios.post('/thread/leave', {
+      userID,
+      threadID,
+    });
+    console.log(response.data);
+  } catch (e) {
+    console.error('Error: ', e);
+  }
+};
+
+const checkMembership = async (
+  userID: string,
+  threadID: string
+): Promise<boolean> => {
+  try {
+    const response = await axios.get('/thread/membership', {
+      params: {
+        userID,
+        threadID,
+      },
+    });
+    return response.data.isMember; // Adjust based on your API response
+  } catch (e) {
+    console.error('Error: ', e);
+    return false;
+  }
+};
+
 export {
   createPost,
   createThread,
   checkAuthStatus,
   changeUsername,
   joinThread,
+  leaveThread,
+  checkMembership,
 };
