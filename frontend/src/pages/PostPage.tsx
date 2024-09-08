@@ -35,6 +35,7 @@ interface Post {
 const PostPage: React.FC = () => {
   const { postID } = useParams<{ postID: string }>();
   const [post, setPost] = useState<Post | null>(null);
+  const [userVote, setUserVote] = useState<'none' | 'up' | 'down'>('none');
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(true);
   const authContext = useContext(AuthContext);
@@ -79,6 +80,35 @@ const PostPage: React.FC = () => {
       setPost(response.data.post);
     } catch (error) {
       console.error('Error posting comment:', error);
+    }
+  };
+
+  const handleUpvote = () => handleVote('up');
+  const handleDownvote = () => handleVote('down');
+
+  // Handle the upvote action
+  const handleVote = async (voteType: 'up' | 'down') => {
+    if (!userId) {
+      alert('You need to be logged in to vote!');
+      return;
+    }
+
+    if (userVote === voteType) {
+      alert(`You have already ${voteType}voted this post`);
+      return;
+    }
+
+    try {
+      const response = await axios.post(`/post/comments/likes/${postID}`, {
+        user_id: userId,
+        voteType: voteType,
+      });
+      console.log(response);
+      setLikes(response.data.likes);
+      setUserVote(voteType);
+    } catch (error) {
+      console.error('Failed to vote:', error.response.data.error);
+      alert(error.response.data.error);
     }
   };
 
@@ -128,9 +158,17 @@ const PostPage: React.FC = () => {
                 <p className={styles.commentBy}>u/{comment.user_id.username}</p>
                 <p className={styles.commentValue}>{comment.commentValue}</p>
                 <div className={styles.icons}>
-                  <FontAwesomeIcon icon={faUpLong} className={styles.up} />
+                  <FontAwesomeIcon
+                    icon={faUpLong}
+                    className={styles.up}
+                    onClick={handleUpvote}
+                  />
                   <p>{comment.likes.length ? comment.likes : 0}</p>
-                  <FontAwesomeIcon icon={faUpLong} className={styles.down} />
+                  <FontAwesomeIcon
+                    icon={faUpLong}
+                    className={styles.down}
+                    onClick={handleDownvote}
+                  />
                   <FontAwesomeIcon
                     icon={faComment}
                     className={styles.commentIcon}

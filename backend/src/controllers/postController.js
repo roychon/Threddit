@@ -55,6 +55,8 @@ const addCommentPost = async (req, res) => {
   }
 };
 
+const updateCommentLikes = () => {};
+
 const getPosts = async (req, res) => {
   try {
     // Extract pagination parameters from query parameters

@@ -96,6 +96,9 @@
   background-color: #f2f2f2;
   border-top: 1px solid white;
 }
+.comment:last-of-type {
+  margin-bottom: 200px;
+}
 
 .loader {
   display: flex;
