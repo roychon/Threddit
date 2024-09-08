@@ -12,4 +12,6 @@ postRouter.get('/', PostController.getPosts);
 // Get posts related to the keyword
 postRouter.post('/keyword', PostController.getKeywordPosts);
 
+postRouter.post('/likes/:postID', PostController.updatePostsLikes);
+
 module.exports = postRouter;

@@ -5,6 +5,7 @@ import DisplayPost from '../components/DisplayPost';
 import AboutThread from '../components/AboutThread';
 import styles from '../styles/ThreadPage.module.css';
 import useInfiniteScrollPosts from '../hooks/useThreadPostInfiniteScroll';
+import LoadingSpinner from '../loader/Spinner';
 
 interface UserProps {
   username: string;
@@ -102,6 +103,8 @@ const ThreadPage = () => {
             );
           }
         })}
+        {/* Display the loading spinner while posts are being fetched */}
+        <div className={styles.loader}>{loading && <LoadingSpinner />}</div>
       </div>
       {threadInfo && (
         <AboutThread

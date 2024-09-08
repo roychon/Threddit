@@ -61,4 +61,62 @@ const getKeywordPosts = async (req, res) => {
   }
 };
 
-module.exports = { createPost, getPosts, getKeywordPosts };
+const updatePostsLikes = async (req, res) => {
+  try {
+    const postId = req.params.postID;
+    const userId = req.body.user_id;
+    const voteType = req.body.voteType;
+
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    // Check if the user has already voted
+    const existingVote = post.votes.find(
+      (vote) => vote.user_id.toString() === userId.toString()
+    );
+    console.log(existingVote);
+
+    if (existingVote) {
+      // Check if the existing vote is the same as the new vote
+      if (existingVote.voteType === voteType) {
+        return res
+          .status(403)
+          .json({ error: 'User has already voted this way' });
+      } else {
+        // If the existing vote is different, update the vote
+        if (voteType === 'up') {
+          post.likes += 1;
+        } else if (voteType === 'down') {
+          post.likes -= 1;
+        }
+
+        if (existingVote.voteType === 'up') {
+          post.likes -= 1;
+        } else if (existingVote.voteType === 'down') {
+          post.likes += 1;
+        }
+
+        existingVote.voteType = voteType;
+      }
+    } else {
+      // If no existing vote, add a new vote
+      if (voteType === 'up') {
+        post.likes += 1;
+      } else if (voteType === 'down') {
+        post.likes -= 1;
+      }
+
+      post.votes.push({ user_id: userId, voteType });
+    }
+
+    await post.save();
+    res.status(200).json({ likes: post.likes, votes: post.votes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to vote' });
+  }
+};
+
+module.exports = { createPost, getPosts, getKeywordPosts, updatePostsLikes };

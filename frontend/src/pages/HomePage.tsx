@@ -4,6 +4,7 @@ import DisplayPost from '../components/DisplayPost';
 import styles from '../styles/HomePage.module.css';
 import GetStarted from '../components/GetStarted';
 import useInfiniteScrollPosts from '../hooks/usePostInfiniteScroll';
+import LoadingSpinner from '../loader/Spinner';
 
 const HomePage: React.FC = () => {
   const { posts, lastPostRef, loading } = useInfiniteScrollPosts(1, '/post');
@@ -19,6 +20,7 @@ const HomePage: React.FC = () => {
               return (
                 <div ref={lastPostRef} key={post._id}>
                   <DisplayPost
+                    postId={post._id}
                     description={post.description}
                     title={post.title}
                     comments={post.comments}
@@ -33,6 +35,7 @@ const HomePage: React.FC = () => {
             } else {
               return (
                 <DisplayPost
+                  postId={post._id}
                   key={post._id}
                   description={post.description}
                   title={post.title}
@@ -46,6 +49,8 @@ const HomePage: React.FC = () => {
               );
             }
           })}
+          {/* Display the loading spinner while posts are being fetched */}
+          <div className={styles.loader}>{loading && <LoadingSpinner />}</div>
         </div>
         <GetStarted />
       </div>

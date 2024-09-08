@@ -25,6 +25,7 @@ const AboutThread = ({
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const [isMember, setIsMember] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     // Check if the user is a member of the thread when the component mounts
@@ -36,12 +37,19 @@ const AboutThread = ({
   }, [auth?.user?._id, threadID]);
 
   const handleJoinOrLeave = async () => {
-    if (isMember) {
-      await leaveThread(auth?.user?._id, threadID);
-      setIsMember(false);
-    } else {
-      await joinThread(auth?.user?._id, threadID);
-      setIsMember(true);
+    setLoading(true);
+    try {
+      if (isMember) {
+        await leaveThread(auth?.user?._id, threadID);
+        setIsMember(false);
+      } else {
+        await joinThread(auth?.user?._id, threadID);
+        setIsMember(true);
+      }
+    } catch (error) {
+      console.error('Error joining or leaving the thread:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,8 +75,17 @@ const AboutThread = ({
         <button
           className='btn small-btn border-radius-10px'
           onClick={handleJoinOrLeave}
+          disabled={loading} // Disable button while loading
         >
-          {isMember ? 'Leave Thread' : 'Join Thread'}
+          {loading ? (
+            <>
+              <span style={{ marginLeft: '8px' }}>
+                {isMember ? 'Leaving...' : 'Joining...'}
+              </span>
+            </>
+          ) : (
+            <span>{isMember ? 'Leave Thread' : 'Join Thread'}</span>
+          )}
         </button>
         <button
           className='btn small-btn border-radius-10px createPost'
