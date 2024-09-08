@@ -20,6 +20,14 @@ const SignUpPage = () => {
   // Context
   const authContext = useContext(AuthContext);
 
+  const generateRandomGradient = (): string => {
+    const color1 = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    const color2 = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    return `linear-gradient(${Math.floor(
+      Math.random() * 360
+    )}deg, ${color1}, ${color2})`;
+  };
+
   // Setters
   const handleUserNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setUserNameText(e.target.value);
@@ -34,11 +42,14 @@ const SignUpPage = () => {
     e.preventDefault();
     setPasswordError('');
     setUserError('');
+    // Generate a random gradient and create the profile picture
+    const gradient = generateRandomGradient();
 
     try {
       const response = await axios.post('/sign-up', {
         username: usernameText,
         password: passwordText,
+        gradient: gradient,
       });
 
       console.log(response);
@@ -52,6 +63,7 @@ const SignUpPage = () => {
         authContext.setUser({
           username: usernameText,
           _id: response.data.id,
+          gradient: gradient,
         });
       }
 

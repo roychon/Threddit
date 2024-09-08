@@ -1,0 +1,157 @@
+.postContainer {
+  width: 800px;
+  height: 240px;
+  background-color: #f2f2f2;
+  margin-left: 50px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  cursor: pointer;
+  color: black;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentSection {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  width: 800px;
+  height: 240px;
+  background-color: #f2f2f2;
+  margin-top: -46px;
+  border-top: 1px solid white;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 25px;
+}
+
+.commentInput {
+  width: 700px;
+  height: 63px;
+  border: none;
+  border-radius: 10px;
+  align-self: center;
+  padding-left: 10px;
+}
+
+.commentButton {
+  align-self: flex-end;
+  border: none;
+  width: 85px;
+  height: 25px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-right: 50px;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: 0.3s all ease;
+}
+
+.commentButton:hover {
+  background-color: rgb(223, 223, 223);
+}
+
+.text {
+  padding-top: 40px;
+  padding-bottom: 20px;
+  font-size: 16px;
+  color: black;
+  margin-left: 50px;
+}
+
+.commentList {
+  margin-top: 20px;
+  color: black;
+}
+
+.commentBy {
+  margin-left: 50px;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+
+.commentValue {
+  margin-left: 50px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.comment {
+  width: 800px;
+  height: 150px;
+  background-color: #f2f2f2;
+  border-top: 1px solid white;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 25px;
+  padding: 20px;
+}
+
+.icons {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+  justify-content: start;
+  margin-left: 20px;
+}
+
+.up,
+.down,
+.commentIcon {
+  cursor: pointer;
+  color: rgb(172, 172, 172);
+  border-radius: 50%;
+  transition: 0.4s all ease;
+}
+
+.up,
+.down {
+  margin: 0 30px;
+}
+
+.commentIcon {
+  margin: 0 10px;
+}
+
+.commentIcon:hover {
+  color: black;
+}
+
+.up:hover {
+  color: rgb(246, 88, 3);
+}
+
+.down {
+  transform: rotate(180deg);
+}
+
+.down:hover {
+  color: rgb(3, 87, 215);
+}
+
+.reply {
+  text-align: center;
+  cursor: pointer;
+}
+
+.reply:hover {
+  transition: 0.4s all ease;
+  color: rgb(19, 19, 19);
+}

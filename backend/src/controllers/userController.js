@@ -51,13 +51,13 @@ function authenticateToken(req, res, next) {
 
 const createUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, gradient } = req.body;
 
     validatePassword(password);
     validateUsername(username);
 
     const hasedPassword = await bcrypt.hash(password, 10);
-    await User.create({ username, password: hasedPassword });
+    await User.create({ username, password: hasedPassword, gradient });
 
     const user = { name: username, password };
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN);

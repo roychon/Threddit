@@ -78,6 +78,7 @@ const ThreadPage = () => {
             return (
               <div ref={lastPostRef} key={post._id}>
                 <DisplayPost
+                  postId={post._id}
                   description={post.description}
                   title={post.title}
                   comments={post.comments}
@@ -92,6 +93,7 @@ const ThreadPage = () => {
             return (
               <DisplayPost
                 key={post._id}
+                postId={post._id}
                 description={post.description}
                 title={post.title}
                 comments={post.comments}

@@ -5,6 +5,7 @@ import { Types } from 'mongoose';
 interface User {
   username: string;
   _id: Types.ObjectId;
+  gradient: string;
 }
 
 interface UserAuth {
@@ -24,9 +25,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     const initialAuthCheck = async () => {
       try {
         const res = await checkAuthStatus();
-        const { username, id } = res.data;
+        const { username, id, gradient } = res.data;
         setIsLoggedIn(true);
-        setUser({ username, _id: id });
+        setUser({ username, _id: id, gradient });
       } catch (e) {
         setIsLoggedIn(false);
       }

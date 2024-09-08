@@ -9,6 +9,7 @@ import Nav from './components/Nav';
 import ChangeUsername from './components/ChangeUsername';
 import ThreadPage from './pages/ThreadPage';
 import CreateThread from './pages/CreateThread';
+import PostPage from './pages/PostPage';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,15 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Nav />
         <CreatePost />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/post/seepost/:postID',
+    element: (
+      <ProtectedRoute>
+        <Nav />
+        <PostPage />
       </ProtectedRoute>
     ),
   },

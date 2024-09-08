@@ -5,7 +5,7 @@ import { faUpLong } from '@fortawesome/free-solid-svg-icons';
 import axios from '../helpers/axios';
 
 // import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 
@@ -63,51 +63,51 @@ const DisplayPost = (props: DisplayPost) => {
   const handleUpvote = () => handleVote('up');
   const handleDownvote = () => handleVote('down');
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     navigate(`/thread/${props.thread_id}`);
   };
 
   return (
     <>
-      {/* <Link to={`/post/${props.username}`} className={styles.link}> */}
-      <div className={props.className}>
-        <div className={styles.topContainer}>
-          <div className={styles.leftSection}>
-            <FontAwesomeIcon
-              icon={faUpLong}
-              className={styles.up}
-              onClick={handleUpvote}
-            />
-            <p className={styles.likes}>{likes}</p>
-            <FontAwesomeIcon
-              icon={faUpLong}
-              className={styles.down}
-              onClick={handleDownvote}
-            />
-          </div>
-          <div className={styles.rightSection}>
-            <div className={styles.rightTopContainer}>
-              <div className={styles.threadName} onClick={handleClick}>
-                {props.threadName}
-              </div>
-              <div className={styles.circle}></div>
-              <p className={styles.postedBy}>Posted by {props.username}</p>
+      <Link to={`/post/seepost/${props.postId}`} className={styles.link}>
+        <div className={props.className}>
+          <div className={styles.topContainer}>
+            <div className={styles.leftSection}>
+              <FontAwesomeIcon
+                icon={faUpLong}
+                className={styles.up}
+                onClick={handleUpvote}
+              />
+              <p className={styles.likes}>{likes}</p>
+              <FontAwesomeIcon
+                icon={faUpLong}
+                className={styles.down}
+                onClick={handleDownvote}
+              />
             </div>
-            <h1
-              className={styles.postTitle}
-              onClick={() => navigate(`/post/${props.username}`)}
-            >
-              {props.title}
-            </h1>
-            <p className={styles.description}>{props.description}</p>
+            <div className={styles.rightSection}>
+              <div className={styles.rightTopContainer}>
+                <div
+                  className={styles.threadName}
+                  onClick={(e) => handleClick(e)}
+                >
+                  {props.threadName}
+                </div>
+                <div className={styles.circle}></div>
+                <p className={styles.postedBy}>Posted by {props.username}</p>
+              </div>
+              <h1 className={styles.postTitle}>{props.title}</h1>
+              <p className={styles.description}>{props.description}</p>
+            </div>
+          </div>
+          <div className={styles.bottomSection}>
+            <FontAwesomeIcon icon={faComment} className={styles.comment} />
+            <span>{props.comments.length} comments</span>
           </div>
         </div>
-        <div className={styles.bottomSection}>
-          <FontAwesomeIcon icon={faComment} className={styles.comment} />
-          <span>{props.comments.length} comments</span>
-        </div>
-      </div>
-      {/* </Link> */}
+      </Link>
     </>
   );
 };

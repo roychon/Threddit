@@ -41,6 +41,7 @@ const SignInPage = () => {
         authContext.setUser({
           username: response.data.username,
           _id: response.data.id,
+          gradient: response.data.gradient,
         });
       }
 

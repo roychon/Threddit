@@ -35,8 +35,8 @@ const HomePage: React.FC = () => {
             } else {
               return (
                 <DisplayPost
-                  postId={post._id}
                   key={post._id}
+                  postId={post._id}
                   description={post.description}
                   title={post.title}
                   comments={post.comments}

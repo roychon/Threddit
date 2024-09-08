@@ -13,7 +13,7 @@ const PostSchema = new Schema({
     type: Number,
     default: 0,
   },
-  comments: [Schema.Types.ObjectId],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comments' }],
   thread_id: {
     required: true,
     type: Schema.Types.ObjectId,

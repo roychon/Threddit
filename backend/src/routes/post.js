@@ -9,6 +9,10 @@ postRouter.post('/', authenticateToken, PostController.createPost);
 
 postRouter.get('/', PostController.getPosts);
 
+postRouter.get('/seepost/:postID', PostController.getPostById);
+
+postRouter.post('/comments/:postID', PostController.addCommentPost);
+
 // Get posts related to the keyword
 postRouter.post('/keyword', PostController.getKeywordPosts);
 

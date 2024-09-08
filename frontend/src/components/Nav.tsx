@@ -1,15 +1,25 @@
 import styles from '../styles/HomePage.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  FocusEvent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import axios from '../helpers/axios';
 import { Link, useLocation } from 'react-router-dom';
+import { AuthContext } from '../context/AuthProvider';
 
 const Nav = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [threads, setThreads] = useState<any>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const location = useLocation();
+
+  // Context
+  const authContext = useContext(AuthContext);
 
   // On mount and when the keywords change, fetch from the backend:
   useEffect(() => {
@@ -80,6 +90,11 @@ const Nav = () => {
     e.preventDefault();
   };
 
+  // Get user's gradient from context
+  const profilePicStyle = authContext?.user?.gradient
+    ? { background: authContext.user.gradient }
+    : { background: 'red' };
+
   return (
     <>
       <div className={styles.container}>
@@ -127,7 +142,7 @@ const Nav = () => {
             )}
           </div>
         </div>
-        <button className={styles.signInButton}>Sign in</button>
+        <div className={styles.profilePic} style={profilePicStyle}></div>
       </div>
     </>
   );
