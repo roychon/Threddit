@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <div className={styles.homePageContainer}>
         <div className='posts'>
           <h1 className={styles.yourFeed}>Your Feed</h1>

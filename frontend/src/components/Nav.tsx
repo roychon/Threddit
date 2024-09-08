@@ -6,6 +6,7 @@ import {
   FocusEvent,
   useContext,
   useEffect,
+  useLayoutEffect,
   useState,
 } from 'react';
 import axios from '../helpers/axios';
@@ -16,10 +17,18 @@ const Nav = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [threads, setThreads] = useState<any>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [profilePicStyle, setProfilePicStyle] = useState<Object>({})
   const location = useLocation();
 
   // Context
   const authContext = useContext(AuthContext);
+
+  useEffect(() => {
+    if (authContext?.user?.gradient) {
+      console.log("in layoutEffect: ", authContext)
+      setProfilePicStyle({background: authContext!.user!.gradient})
+    }
+  }, [authContext])
 
   // On mount and when the keywords change, fetch from the backend:
   useEffect(() => {
@@ -91,9 +100,9 @@ const Nav = () => {
   };
 
   // Get user's gradient from context
-  const profilePicStyle = authContext?.user?.gradient
-    ? { background: authContext.user.gradient }
-    : { background: 'red' };
+  // const profilePicStyle = authContext?.user?.gradient
+  //   ? { background: authContext.user.gradient }
+  //   : { background: 'red' };
 
   return (
     <>

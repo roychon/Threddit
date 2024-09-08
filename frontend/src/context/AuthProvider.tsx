@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useEffect, useState, ReactNode, useLayoutEffect } from 'react';
 import { checkAuthStatus } from '../helpers/backendCommicators';
 import { Types } from 'mongoose';
 
@@ -26,11 +26,12 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const res = await checkAuthStatus();
         const { username, id, gradient } = res.data;
-        console.log(gradient)
+        console.log("Gradient: ", gradient)
         setIsLoggedIn(true);
         setUser({ username, _id: id, gradient });
       } catch (e) {
         setIsLoggedIn(false);
+        console.log("set log in to false")
       }
     };
     initialAuthCheck();

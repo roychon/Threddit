@@ -4,8 +4,8 @@ import SignUpPage from '../pages/SignUpPage';
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const auth = useContext(AuthContext);
-  if (auth?.isLoggedIn == null) return <p>Loading...</p>;
-  console.log(auth);
+  console.log("protected route auth provider: ", auth)
+  if (auth?.isLoggedIn === null) return <p>Loading...</p>;
   return auth?.isLoggedIn ? children : <SignUpPage />;
 };
 

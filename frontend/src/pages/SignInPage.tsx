@@ -30,6 +30,7 @@ const SignInPage = () => {
         username: usernameText,
         password: passwordText,
       });
+      console.log("response: ", response)
 
       setUserNameText('');
       setPasswordText('');
@@ -37,12 +38,13 @@ const SignInPage = () => {
 
       // Update AuthContext state here
       if (authContext) {
-        authContext.setIsLoggedIn(true);
+        // console.log("test")
         authContext.setUser({
           username: response.data.username,
           _id: response.data.id,
           gradient: response.data.gradient,
         });
+        authContext.setIsLoggedIn(true);
       }
 
       // Navigate to homepage on successful login
