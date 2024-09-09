@@ -169,6 +169,8 @@ button:hover {
   height: 320px;
   padding: 40px 50px;
   justify-content: space-between;
+  margin-left: 100px;
+  margin-top: 100px;
 }
 
 #change-username-input {

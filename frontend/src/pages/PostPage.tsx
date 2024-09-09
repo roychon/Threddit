@@ -81,6 +81,7 @@ const PostPage: React.FC = () => {
         userId,
         parentId,
       });
+
       setReplyForms((prev) => ({ ...prev, [parentId]: '' })); // Clear the reply form input
       setVisibleReplyForm(null); // Hide the reply form after submission
       const response = await axios.get(`/post/seepost/${postID}`);
