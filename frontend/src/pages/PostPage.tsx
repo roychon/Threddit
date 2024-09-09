@@ -18,6 +18,7 @@ interface Comment {
     username: string;
   };
   commentValue: string;
+  replies: [Comment]
 }
 
 interface Post {
@@ -90,6 +91,16 @@ const PostPage: React.FC = () => {
     }
   };
 
+  const handleSubCommentSubmit = async (e: React.FormEvent<Element>, parentId: string) => {
+    e.preventDefault()
+    const commentValue = replyForms[parentId]
+    const data = await axios.post(`/comment/subcomment/${parentId}`, {
+      commentValue, "userId": authContext?.user?._id
+    })
+    console.log(data)
+
+  }
+
   const toggleReplyForm = (commentId: string) => {
     setVisibleReplyForm((prev) => (prev === commentId ? null : commentId));
   };
@@ -161,9 +172,9 @@ const PostPage: React.FC = () => {
                       onCommentChange={(e) =>
                         handleCommentChange(e, comment._id)
                       }
-                      onCommentSubmit={(e) =>
-                        handleCommentSubmit(e, comment._id)
-                      }
+                      onCommentSubmit={(e) => {
+                        handleSubCommentSubmit(e, comment._id)
+                      }}
                     />
                   </div>
                 )}

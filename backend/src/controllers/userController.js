@@ -57,7 +57,7 @@ const createUser = async (req, res) => {
     validateUsername(username);
 
     const hasedPassword = await bcrypt.hash(password, 10);
-    await User.create({ username, password: hasedPassword, gradient });
+    const createdUser = await User.create({ username, password: hasedPassword, gradient });
 
     const user = { name: username, password };
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN);
@@ -66,7 +66,7 @@ const createUser = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
       })
-      .json({ message: 'Created user successfully' });
+      .json(createdUser);
   } catch (error) {
     if (error.message.includes('Password must')) {
       return res

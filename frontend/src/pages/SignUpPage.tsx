@@ -62,7 +62,7 @@ const SignUpPage = () => {
         authContext.setIsLoggedIn(true);
         authContext.setUser({
           username: usernameText,
-          _id: response.data.id,
+          _id: response.data._id,
           gradient: gradient,
         });
       }

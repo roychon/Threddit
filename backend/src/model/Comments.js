@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const CommentsSchema = new Schema({
   user_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }],
+  comments: {
+    type: [{ type: Schema.Types.ObjectId, ref: 'Comments' }],
+    default: []
+  },
   likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   commentValue: {
     required: true,
