@@ -162,9 +162,6 @@ const Nav = () => {
             <div className={styles.dropdownMenu}>
               <ul>
                 <li>
-                  <Link to='/myThreads'>Threads</Link>
-                </li>
-                <li>
                   <Link to='/change-username'>Settings</Link>
                 </li>
                 <li>
