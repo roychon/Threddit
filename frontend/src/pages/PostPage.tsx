@@ -49,6 +49,7 @@ const PostPage: React.FC = () => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(`post/seepost/${postID}`);
+        console.log("post info: ", response.data.post)
         setPost(response.data.post);
         setLoading(false);
       } catch (error) {
