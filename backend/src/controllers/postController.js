@@ -156,17 +156,38 @@ const getPostById = async (req, res) => {
     const { postID } = req.params;
 
     // Populate thread_id, user_id, and comments (including the user details for each comment)
+    // const post = await Post.findById(postID)
+    //   .populate('user_id', 'username gradient') // Populate the post's user details
+    //   .populate('thread_id', 'title')
+    //   .populate('thread_id user_id') // Populate the thread details if needed
+    //   .populate({
+    //     path: 'comments',
+    //     populate: { path: 'user_id', select: 'username gradient' }, // Populate each comment's user details
+    //   });
+
     const post = await Post.findById(postID)
       .populate('user_id', 'username gradient') // Populate the post's user details
       .populate('thread_id', 'title')
       .populate('thread_id user_id') // Populate the thread details if needed
       .populate({
-        path: 'comments',
-        populate: { path: 'user_id', select: 'username gradient' }, // Populate each comment's user details
+        path: 'comments', // Populate comments in the post
+        populate: [
+          {
+            path: 'user_id',
+            select: 'username gradient'
+          },
+          {
+          path: 'comments', // Populate the replies (comments within comments)
+          model: 'Comments', // Reference the Comments model explicitly
+          populate: {
+            path: 'user_id', // Populate user details for replies
+            select: 'username gradient',
+          },
+        }],
       });
+      // console.log(post.comments[0])
       console.log(post)
-    // const comments = await Post.findById(postID).select(comments)
-    // console.log("COMMENTS: ", comments)
+    
     if (!post) return res.status(404).json({ message: 'Post not found' });
 
     return res.json({ post: post });
