@@ -115,11 +115,32 @@ const loginUser = async (req, res) => {
   }
 };
 
+const signOutUser = (req, res) => {
+  // Clear the cookie by setting its expiration date in the past
+  res.cookie('access_token', '', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    expires: new Date(0),
+  });
+
+  res.status(200).send('Signed out successfully');
+};
+
 const verifyUser = async (req, res) => {
   const { username } = req;
   const user = await User.findOne({ username });
   if (!user) return res.status(404).send('User not found');
-  return res.json({ id: user._id, username: user.username, gradient: user.gradient });
+  return res.json({
+    id: user._id,
+    username: user.username,
+    gradient: user.gradient,
+  });
 };
 
-module.exports = { createUser, loginUser, authenticateToken, verifyUser };
+module.exports = {
+  createUser,
+  loginUser,
+  authenticateToken,
+  verifyUser,
+  signOutUser,
+};
