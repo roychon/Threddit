@@ -39,6 +39,7 @@ interface Post {
 const PostPage: React.FC = () => {
   const { postID } = useParams<{ postID: string }>();
   const [post, setPost] = useState<Post | null>(null);
+  const [comment, setComment] = useState();
   const [loading, setLoading] = useState(true);
   const [replyForms, setReplyForms] = useState<Record<string, string>>({}); // Separate state for each reply form
   const [visibleReplyForm, setVisibleReplyForm] = useState<string | null>(null); // Track visibility
@@ -59,8 +60,7 @@ const PostPage: React.FC = () => {
     };
 
     fetchPost();
-  }, [postID]);
-
+  }, [postID, comment]);
   const handleCommentChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     commentId: string
@@ -99,8 +99,9 @@ const PostPage: React.FC = () => {
     const data = await axios.post(`/comment/subcomment/${parentId}`, {
       commentValue, "userId": authContext?.user?._id
     })
-    console.log(data)
-
+    // console.log(data)
+    setComment(data.data)
+    setVisibleReplyForm(null)
   }
 
   const toggleReplyForm = (commentId: string) => {

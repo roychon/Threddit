@@ -16,7 +16,7 @@ commentRouter.post('/subcomment/:parentId', async (req, res) => {
     const comment = await Comments.findOne({_id: parentId}) // comment that is being commented on
     comment.comments = [...comment.comments, subComment._id]
     await comment.save()
-    return res.send("hello")
+    return res.json(comment)
 });
 
 module.exports = commentRouter;
