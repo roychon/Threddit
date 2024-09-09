@@ -164,7 +164,9 @@ const getPostById = async (req, res) => {
         path: 'comments',
         populate: { path: 'user_id', select: 'username gradient' }, // Populate each comment's user details
       });
-
+      console.log(post)
+    // const comments = await Post.findById(postID).select(comments)
+    // console.log("COMMENTS: ", comments)
     if (!post) return res.status(404).json({ message: 'Post not found' });
 
     return res.json({ post: post });

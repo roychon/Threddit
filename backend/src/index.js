@@ -9,7 +9,8 @@ const loginRouter = require('./routes/login');
 const postRouter = require('./routes/post');
 const statusRouter = require('./routes/status');
 const threadRouter = require('./routes/threads');
-const userRouter = require('./routes/user');
+const userRouter = require('./routes/user')
+const commentRouter = require('./routes/comment');
 const signOutRouter = require('./routes/signOut');
 
 const PORT = process.env.PORT || '3000';
@@ -30,7 +31,8 @@ app.use('/login', loginRouter);
 app.use('/post', postRouter);
 app.use('/thread', threadRouter);
 app.use('/auth-status', statusRouter);
-app.use('/user', userRouter);
+app.use("/user", userRouter)
+app.use("/comment", commentRouter)
 app.use('/signOut', signOutRouter);
 
 // START SERVER
